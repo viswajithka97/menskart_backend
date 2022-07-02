@@ -1,0 +1,94 @@
+<body style="background-color: black;">
+<div class="container ">
+    {{#each address}}
+  <form action="/edit-address/{{this.Address.Useraddress}}" method="post">
+<div class="row mt-5 justify-content-center">
+  <div class="col-md-8 mb-4" >
+    <div class="card mb-4" style="background-color:rgb(241, 234, 234);">
+      <div class="card-header py-3 bg-dark">
+        <h5 class="mb-0 text-light">Edit Address</h5>
+      </div>
+      
+      <div class="card-body bg-light">
+        
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form7Example1" name="name" value="{{this.Address.name}}" class="form-control" />
+            
+                <label class="form-label" for="form7Example1">Name</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form7Example2" name="phoneNumber" value="{{this.Address.phoneNumber}}" class="form-control" />
+                <label class="form-label" for="form7Example2">Phone Number</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input -->
+          <div class="row mb-4">
+            <div class="col">
+          <div class="form-outline mb-4">
+            <input type="text" id="form7Example3" name="state" value="{{this.Address.state}}" class="form-control" />
+            <label class="form-label" for="form7Example3">State</label>
+          </div>
+          </div>
+
+          <!-- Text input -->
+           <div class="col">
+          <div class="form-outline mb-4">
+            <input type="text" id="form7Example4" name="pincode" value="{{this.Address.pincode}}" class="form-control"/>
+            <label class="form-label" for="form7Example4">Pincode</label>
+          </div>
+           </div>
+           </div>
+
+          <!-- Email input -->
+           <div class="row mb-4">
+            <div class="col">
+          <div class="form-outline mb-4">
+            <input type="text" id="form7Example5" name="city" value="{{this.Address.city}}" class="form-control" />
+            <label class="form-label" for="form7Example5">City</label>
+          </div>
+        </div>
+          <!-- Number input -->
+          <div class="col">
+          <div class="form-outline mb-4">
+            <input type="number" id="form7Example6" name="house" value="{{this.Address.house}}" class="form-control" />
+            <label class="form-label" for="form7Example6">House No,Building Name</label>
+          </div>
+          </div>
+          </div>
+            <div class="row mb-4">
+                <div class="col ms-5">
+          <div class="form-outline mb-4">
+               <input type="radio" class="form-check-input" id="radio1" name="location" value="home" checked><strong>Home</strong>
+               </div></div>
+               <div class="col">
+          <div class="form-outline mb-4">
+               <input type="radio" class="form-check-input" id="radio1" name="location" value="office" ><strong>Office</strong>
+               </div></div>
+
+
+
+            </div>
+          <!-- Message input -->
+          <div class="form-outline mb-4">
+            <textarea class="form-control" id="form7Example7" name="address"  rows="4">{{this.Address.address}}</textarea>
+            <label class="form-label" for="form7Example7">Address information</label>
+          </div>
+
+          <!-- Checkbox -->
+         <div class="row mb-4">
+             <button type="submit" class="btn btn-dark text-light">Add Address</button> 
+         </div>
+      </div>
+      
+    </div>
+  </div>
+  </div></form>
+  {{/each}}</div>
+  </body>

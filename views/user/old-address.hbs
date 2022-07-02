@@ -1,0 +1,229 @@
+<section class="breadcrumb-option mt-5" style="background-color: black;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        {{!-- <div class="breadcrumb__text">
+          <h4>Check Out</h4> --}}
+          {{!-- <div class="breadcrumb__links">
+            <a href="/">Home</a>
+            <span>Check Out</span>
+          </div> --}}
+        {{!-- </div> --}}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+  <div class="container">
+    <div class="checkout__form">
+      <div class="row">
+        <div class="col-lg-8 col-md-6">
+
+          {{#if checkoutAddressMsg}}
+
+          <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlink:href="#check-circle-fill" />
+            </svg>
+            <div>
+              {{checkoutAddressMsg}}
+            </div>
+          </div>
+          {{/if}}
+
+
+          <h6 class="coupon__code text-center fs-4">BILLING DETAILS</h6>
+         <a href="/addNewAddress" class=" btn btn-primary">Add NewAddress</a>
+          <div class="card-header fw-bold mb-2">
+            SAVED ADDRESSES
+          </div>
+          <div>
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <form action="/add-checkout-address" method="post" id="addAddressForm2">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add New Address</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                      <div class="">
+                        <label class="labels">Name</label><input type="text" name="name" class="form-control"
+                          placeholder="Name" />
+                      </div>
+                      <div class="">
+                        <label class="labels">Address</label><input type="text" name="address" id="phoneNumber"
+                          class="form-control" placeholder="address" />
+                      </div>
+                      <div>
+                        <label for="address" class="form-label">Address Type</label>
+                        <select class="form-select" id="category" name="type" aria-label="Default select example"
+                          required>
+                          <option value="" selected>Choose a Type</option>
+                          <option value="Home">Home</option>
+                          <option value="Work">Work</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="labels">Mobile</label><input type="text" name="phone" id="pincode"
+                            class="form-control" placeholder="mobile" />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">Pincode</label><input type="text" name="pincode" class="form-control"
+                            placeholder="pincode" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {{#each address}}
+
+        <div class="card mb-3">
+          <div class="form-check">
+            <div class="card-header">
+
+              <input class="form-check-input" type="radio" name="checkoutAddress"
+                onclick="selectAddress('{{this._id}}')"
+                id="{{this._id}}" value="{{this._id}}">
+              <label class="form-check-label" for="{{this._id}}">
+                
+                {{this.type}}
+              </label>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{this.name}}
+                -
+                 {{this.mobile}}
+               </h5>
+              <p class="card-text">{{this.address}}</p>
+              <p class="card-text">{{this.pincode}}</p>
+              <p class="card-text">{{this.mobile}}</p>
+              <input type="text " name="userId" value="{{user._id}}" hidden>
+            </div>
+          </div>
+        </div>
+
+        {{/each}}
+      </div>
+      <div class="col-lg-4 col-md-6 mt-5">
+        <div class="checkout__order">
+          <h4 class="order__title">Your order</h4>
+          <div class="checkout_order_products fw-bold">Product
+            <span class="fw-bold">Total</span>
+          </div>
+          <ul class="checkout_total_products" type="circle">
+            {{#each products}}
+            <li class=""> {{this.product.Name}}</li>
+            {{/each}}
+          </ul>
+          <ul class="checkout_total_all">
+            <li class="fs-4">Total <span id="totalPrice">{{total}}</span> <span>₹</span></li>
+          </ul>
+
+
+          <div class="form-check mt-2">
+            <input class="form-check-input" type="radio" name="payment-method" id="paypal" value="ONLINE"
+              onclick="selectPayment('ONLINE')" />
+            <label class="form-check-label" for="paypal">
+              ONLINE
+            </label>
+          </div>
+          <div class="form-check mt-2">
+            <input class="form-check-input" type="radio" name="payment-method" id="COD" value="COD"
+              onclick="selectPayment('COD')" />
+            <label class="form-check-label" for="COD">
+              COD
+            </label>
+          </div>
+
+          <button type="button"  onclick="placeOrder()" class=" btn btn-primary  site-btn mt-4">PLACE ORDER</button>
+          <input type="text" id="userName" value="{{user.Name}}" disabled hidden>
+          <input type="text" id="userPhone" value="{{user.Phone}}" disabled hidden>
+          <input type="text" id="userEmail" value="{{user.Email}}" disabled hidden>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+  var grandTotal = {{ total }}
+
+
+  var checkoutAddressId
+  var paymentMethod
+  function selectAddress(id) {
+    checkoutAddressId = id
+  }
+  var userName = document.getElementById('userName').value
+  var userPhone = document.getElementById('userPhone').value
+  var userEmail = document.getElementById('userEmail').value
+  function selectPayment(payment) {
+    paymentMethod = payment
+  }
+  function placeOrder() {
+    if (!checkoutAddressId && paymentMethod) {
+      swal({
+        title: "Please Select Address to Place Order",
+        icon: 'warning',
+        dangerMode: true,
+      })
+    }
+    else if (!paymentMethod && checkoutAddressId) {
+      swal({
+        title: "Please Select Payment Method to Place Order",
+        icon: 'warning',
+        dangerMode: true,
+      })
+    }
+    else if (!paymentMethod && !checkoutAddressId) {
+      swal({
+        title: "Please Select Address and Payment Method to Place Order",
+        icon: 'warning',
+        dangerMode: true,
+      })
+    }
+    else {
+      $.ajax({
+        url: `/orderAddressSelection?payment=${paymentMethod}&addressId=${checkoutAddressId}`,
+        method: 'post',
+        success: (res) => {
+          if (res) {
+            swal("Your Order Placed Successfully")
+              .then((value) => {
+                location.href = '/orders'
+              })
+          }
+          else {
+
+          }
+        }
+      })
+    }
+  }
+
+
+
+</script>

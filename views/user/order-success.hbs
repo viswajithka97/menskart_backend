@@ -1,0 +1,90 @@
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+body {
+    background-color: #eee;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300
+}
+
+.cart {
+    height: 100vh
+}
+
+.progresses {
+    display: flex;
+    align-items: center
+}
+
+.line {
+    width: 76px;
+    height: 6px;
+    background: #63d19e
+}
+
+.steps {
+    display: flex;
+    background-color: #63d19e;
+    color: #fff;
+    font-size: 12px;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%
+}
+
+.check1 {
+    display: flex;
+    background-color: #63d19e;
+    color: #fff;
+    font-size: 17px;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+ 
+}
+
+.invoice-link {
+    font-size: 15px
+}
+
+.order-button {
+    height: 50px
+}
+
+.background-muted {
+    background-color: #fafafc
+}
+</style>
+<body style="background-color: black;">
+<div class="container mt-5 mb-4">
+    <div class="row d-flex cart  justify-content-center">
+        <div class="col-md-10"  >
+            <div class="card" style="background-color:rgb(241, 234, 234);">
+            
+                <div class="d-flex justify-content-center border-bottom">
+                    <div class="p-3">
+                        <div class="progresses">
+                            <div class="steps"> <span><i class="fa fa-check"></i></span> </div> <span class="line"></span>
+                            <div class="steps"> <span><i class="fa fa-check"></i></span> </div> <span class="line"></span>
+                            <div class="steps"> <span class="font-weight-bold">3</span> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class=" border-right p-5">
+                        <div class="text-center order-details">
+                            <div class="d-flex justify-content-center mb-5 flex-column align-items-center"> <span class="check1"><i class="fa fa-check"></i></span> <span class="font-weight-bold">Order Confirmed</span> <small class="mt-2">Your illustraion will go to you soon</small> <a href="#" class="text-decoration-none invoice-link">View Invoice</a> </div> <a href="/orders" class="btn btn-danger mt-2">Go to your Order</a></button> <a href="/" class="btn btn-danger mt-2">Continue Shopping</a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div> </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

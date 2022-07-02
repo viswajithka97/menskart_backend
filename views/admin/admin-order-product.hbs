@@ -1,0 +1,33 @@
+
+<section>
+    <div class="container mt-5">
+    <div class="row">
+        
+        {{#each products}}
+        <div class="col-md-3">
+            <div class="card mt-3 xzoomr bg-light" style="width: 18rem;height:26rem;border-radius: 1rem">
+               
+  <div class="text-center">  <a href="/view-image/{{this.product._id}}">      
+  <img src="/product-images/{{this.product._id}}.jpg" style="width: 200px;height:250px"  class="card-img-top mx-auto" alt="..."></a>
+  </div>
+  <div class="">
+      <div class="d-flex">
+        
+    <p><span class="text-muted ms-5">{{this.product.brand}}</span><br>
+     
+    <span class="justify-start" >{{this.product.description}}</span>
+    
+    <br><span><span class="text-success fs-5">₹{{this.product.offerPrice}} <span class="text-danger text-decoration-line-through fs-6">  ₹{{this.product.orginalPrice}}</span>
+    <span class="fs-5"><span class=" fs-5 ms-3">{{this.product.offerpercentage}}% off</span></p><br>
+ 
+    </div>    <span class="fs-5"><span class=" fs-5 ms-3">quantity:{{this.quantity}}</span>
+    
+    
+  </div>
+</div>
+</div>
+{{/each}}
+        </div>
+    </div>
+    </section> 
+</section>

@@ -1,0 +1,173 @@
+
+<body style="background-color: black;">
+  
+
+<section class="h-100 gradient-custom" >
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center  h-100">
+      <div class="col-lg-12 col-xl-12">
+        <div class="card" style="border-radius: 10px; background-color: rgb(241, 234, 234);">
+          <div class="card-header px-4 py-5">
+            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">{{user.name}}</span>!</h5>
+          </div>
+          <div class="card-body p-4" style="background-color:rgb(241, 234, 234);">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+            </div>
+            <div class="card shadow-0 border mb-4" style="background-color:rgb(241, 234, 234);">
+              <div class="card-body">
+                
+                  {{#each orders}}
+                 
+                <div class="row mt-5">
+              
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class=" mb-0"><strong>Address:<br></strong>
+                    {{this.user}}
+                    {{this.deliveryDetails.address}},
+                     {{this.deliveryDetails.state}}<br>
+                    {{this.deliveryDetails.city}},
+                      {{this.deliveryDetails.pincode}}<br>
+                    {{this.deliveryDetails.mobile}}<br>
+                   
+                   
+
+
+                    </p>
+                  </div>
+                  <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">White</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">{{this.Date}}</p>
+                  </div>
+                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                     {{#if placed}}
+                      <strong  >Status:<span class="text-success bg-succes"></span>{{this.status}}</strong>
+                      {{else}}
+                    <p class="text-success mb-0 small"><span class="text-muted">Status: </span>{{this.status}}</p>
+                    {{/if}}
+                  </div>
+                    <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-success mb-0 small"><span class="text-muted">Payment:</span>{{this.paymentMethode}}</p>
+                  </div>
+                 
+                  <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                    <p class=" mb-0 small">₹{{this.totalAmount}}</p>
+                  </div>
+
+
+                
+
+                 <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                 <a href="/view-order-products/{{this._id}}" class="btn btn-dark text-light">view product</a>
+                  </div>
+                    {{#if canceled}}
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <span class="text-danger">Order Cancelled
+                    </span>
+                    </div>
+
+                    {{else if Delived}}
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                  <a href="#" class="btn btn-primary">Add Review</a>
+                  </div>
+                      {{else}}
+                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class=" mb-0 small"><button onclick="updateOrder('{{this._id}}')" class="btn btn-danger">cancel order</button> </p>
+                  </div>
+                  {{/if}}
+                   
+                   
+                </div>
+                
+               
+                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-2">
+                    <p class="text-muted mb-0 small">Track Order</p>
+                  </div>
+                  <div class="col-md-10">
+                    <div class="progress" style="height: 6px; border-radius: 16px;">
+                      {{#if canceled}}
+                      <div class="progress-bar" role="progressbar"
+                        style="width: 100%; border-radius: 16px; background-color: #f40a0a;" aria-valuenow="100"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+
+                        {{else if Delived}}
+                           <div class="progress-bar" role="progressbar"
+                        style="width: 100%; border-radius: 16px; background-color: #25a000;" aria-valuenow="100"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+
+                         {{else if order}}
+                           <div class="progress-bar" role="progressbar"
+                        style="width: 10%; border-radius: 16px; background-color: #1838c9;" aria-valuenow="50"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                            {{else if shipped}}
+                           <div class="progress-bar" role="progressbar"
+                        style="width: 50%; border-radius: 16px; background-color: #1838c9;" aria-valuenow="50"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                              {{else if Arriving}}
+                           <div class="progress-bar" role="progressbar"
+                        style="width: 75%; border-radius: 16px; background-color: #0025f8;" aria-valuenow="75"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+
+                        {{/if}}
+                    </div>
+                    <div class="d-flex justify-content-around mb-1">
+                      <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
+                      {{#if canceled}}
+                      <p class="text-danger mt-1 mb-0 small ms-xl-5 ">cancelled</p>
+                      {{else}}
+                       <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                       {{/if}}
+                    </div>
+                  </div>
+                </div>
+                 {{/each}}
+              </div>
+            </div>
+            
+        
+            
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  // sweet alert for block user
+  function updateOrder(id) {
+    $.ajax({
+      url:'/cancel-orders',
+      data:{
+        orderId:id,
+      },
+      method:'post',
+      success:(response)=>{
+        if(response.status){
+         location.reload()
+        }
+      }
+    })
+  }
+  </script>
+  
+  

@@ -1,0 +1,79 @@
+<section>
+  <div class="container mt-5">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+              <th scope="col">no</th>
+          <th scope="col">title</th>
+          <th scope="col">description</th>
+          <th scope="col">image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each banneer}}
+          <tr>
+            <th scope="row">1</th>
+            <td>
+              {{this.title}}
+            </td>
+            <td>
+              {{this.description}}
+            </td>
+            <td>
+            <img
+                style="width: 50px; hieght: 50px;"
+                src="/banner-images/{{this._id}}.jpg"
+                alt=""
+              />
+
+            </td>
+            <td>
+              <a
+                href="/admin/edit-banner/{{this._id}}"
+                class="btn btn-primary"
+              >Edit</a>
+              <button
+                class="btn btn-danger"
+                onclick="deleteBanner('{{this._id}}')"
+              >delete</button>
+            </td>
+          </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+
+</section>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+   function deleteBanner(id){
+swal({
+  text: 'Are you sure want to delete ',
+  icon:"warning",
+  button: true,
+  dangerMode:true,
+})
+.then((name) => {
+    if(name){
+       $.ajax({
+           url:'/admin/delete-banner',
+           data:{
+               bannerId:id,
+           },
+           method:'post',
+           success:(response)=>{     
+                swal("Status Updated",{icon:"success"})
+               location.reload()
+           }
+           
+       }) 
+    } 
+})
+}
+  
+
+   
+
+</script>

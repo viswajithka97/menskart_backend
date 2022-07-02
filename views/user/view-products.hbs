@@ -1,0 +1,644 @@
+
+<section style="background-color: black; overflow-x: hidden;">
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+           </div>
+<div class="carousel-inner" >
+
+    {{#each banner}}    
+            <div class="carousel-item {{this.class}}" style="padding: 0;stagePadding: 0,
+  items: 1,
+  loop:true,
+  margin:0,
+  singleItem:true,
+  nav:true">
+                <img src="/banner-images/{{this._id}}.jpg"  class="d-block w-100" alt="Wild Landscape" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>{{this.title}}</h1>
+                    <p>{{this.Description}}</p>
+                </div>
+            </div>
+            
+           
+            {{/each}}
+        </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+</div>
+<section class="page-section" id="team">
+  <div class="container-fluid">
+  <div class="twelve mt-5">
+  <h1 class="text-light">Categories</h1>
+</div>
+    </div>
+    <div class="row mt-3">
+      {{#each category}}
+      <div class="col-md-3 mt-5">
+        <div class="team-member text-center">
+          <a href="/category-view/{{this.category}}">
+          <img class="mx-auto rounded-circle" src="/category-image/{{this._id}}.jpg" height="200px;" alt="..." /></a>
+          <h4 class="mt-2 text-light" >{{this.category}}</h4>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+</section>
+    
+<section>
+
+<div class="eight my-5">
+  <h1 class="text-light">Trending Products</h1>
+</div>
+{{!-- <section>
+    <div class="container mt-5">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-3">
+            <div class="card mt-3 xzoomr bg-light" style="width: 18rem;height:26rem;border-radius: 1rem">
+               
+  <div class="text-center">  <a href="/view-image/{{this._id}}">      
+  <img src="/product-images/{{this._id}}.jpg" style="width: 200px;height:250px"  class="card-img-top mx-auto" alt="..."></a>
+  </div>
+  <div class="">
+      <div class="d-flex">
+        
+    <p><span class="text-muted ms-5">{{this.brand}}</span><br>
+     
+    <span class="justify-start" >{{this.description}}</span>
+    
+    <br><span><span class="text-success fs-5">₹{{this.offerPrice}} <span class="text-danger text-decoration-line-through fs-6">  ₹{{this.orginalPrice}}</span>
+    <span class="fs-5"><span class=" fs-5 ms-3">{{this.offerpercentage}}% off</span></p>
+    </div>
+    
+    <p class="text-center">
+    <button onclick="addToCart('{{this._id}}')" class=" btn btn-sm btn-dark"><i class="fa fa-shopping-cart fa-lg text-light" id="cart-btn"> </i>Add to Cart</button>
+    <button id="{{this._id}}" onclick="addWishlist('{{this._id}}','{{../userId}}')"  class=" btn btn-sm btn-dark">   <i class="fas fa-heart fa-lg text-light " id="cart-btn"></i>Add to Wishlist</button>
+    </p>
+    
+    
+  </div>
+</div>
+</div>
+{{/each}}
+        </div>
+    </div>
+    </section> 
+</section> --}}
+{{!-- GGGGGGGGGGGGGGGGGGGGGGGGGGGG --}}
+
+<div class="container">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-3 col-sm-6 mt-4" >
+            <div class="product-grid">
+                <div class="product-image">
+                    <a  class="image">
+                        <img class="pic-1" src="/product-images/{{this._id}}.jpg">
+                    </a>
+                    <span class="product-sale-label">-{{this.offerpercentage}}%</span>
+                    <ul class="social">
+                        <li><a  id="{{this._id}}" onclick="addWishlist('{{this._id}}','{{../userId}}')" data-tip="Add to Wishlist"><i class="fa fa-heart fa-lg mt-3"></i></a></li>
+                        <li><a href="#" data-tip="Compare"><i class="fa fa-random fa-lg mt-3"></i></a></li>
+                        <li><a href="/view-image/{{this._id}}" data-tip="Quick View"><i class="fa fa-eye fa-lg mt-3"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <span class="product-category"><a >{{this.description}}</a></span>
+                    <h3 class="title"><a >{{this.brand}}</a></h3>
+                    <ul class="rating">
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star disable"></li>
+                       <li>(2 review)</li>
+                    </ul>
+                    <div class="price">₹{{this.offerPrice}} <span>₹{{this.orginalPrice}}</span></div>
+                    <a class="add-to-cart" onclick="addToCart('{{this._id}}')" data-tip="Add to Cart">ADD TO CART</a>
+                </div>
+            </div>
+        </div>
+      {{/each}}
+    </div>
+</div>
+</section>
+
+<style>
+  :root{ --main-color: #e74c3c; }
+.product-grid{
+    font-family: 'Work Sans', sans-serif;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+.product-grid:hover{ border-color: #c1c1c1; }
+.product-grid .product-image{ position: relative; }
+.product-grid .product-image a.image{ display: block; }
+.product-grid .product-image img{
+    width: 100%;
+    height: auto;
+}
+.product-grid .product-sale-label{
+    color: #fff;
+    background: #83b71c;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 5px;
+    transform: skew(-18deg);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    transition: all 0.3s;
+}
+.product-grid .social{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    transition: .4s ease-in-out;
+}
+.product-grid:hover .social{
+    opacity: 1;
+    top: 15px;
+}
+.product-grid .social li a{
+    color: var(--main-color);
+    background: #fff;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+    margin: 0 0 10px;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: .4s ease-in-out;
+}
+.product-grid .social li a:hover{
+    color: #fff;
+    background: var(--main-color);
+}
+.product-grid .social li a:before,
+.product-grid .social li a:after{
+    content: attr(data-tip);
+    color: #fff;
+    background: #444;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 5px 10px;
+    white-space: nowrap;
+    display: none;
+    transform: translateY(-50%);
+    position: absolute;
+    right: 53px;
+    top: 50%;
+}
+.product-grid .social li a:after{
+    content: '';
+    height: 15px;
+    width: 15px;
+    padding: 0;
+    transform: translateY(-50%) rotate(45deg);
+    right: 50px;
+    z-index: -1;
+}
+.product-grid .social li a:hover:before,
+.product-grid .social li a:hover:after{
+    display: block;
+}
+.product-grid .product-content{
+    padding: 15px 10px;
+    position: relative;
+}
+.product-grid .product-category{
+    font-size: 14px;
+    text-transform:uppercase;
+    margin-bottom: 5px;
+    display: block;
+}
+.product-grid .product-category a{
+    color: #999;
+    transition: all .4s ease 0s;
+}
+.product-grid .product-category a:hover{ color: var(--main-color); }
+.product-grid .title{
+    font-size: 18px;
+    text-transform: capitalize;
+    margin: 0 0 7px;
+    display: block;
+}
+.product-grid .title a{
+    color: #444;
+    transition: all .4s ease 0s;
+}
+.product-grid .title a:hover{ color: var(--main-color); }
+.product-grid .rating{
+    padding: 0;
+    margin: 0 0 7px;
+    list-style: none;
+}
+.product-grid .rating li{
+    color: #ffd200;
+    font-size: 12px;
+    display: inline-block;
+}
+.product-grid .rating li:last-child{ color: #999; }
+.product-grid .rating li.disable{ color: #999; }
+.product-grid:hover .rating{ opacity: 0; }
+.product-grid .price{
+    color: var(--main-color);
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 1;
+    transition: .3s ease;
+}
+.product-grid .price span{
+    color: #999;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+.product-grid:hover .price{ opacity: 0; }
+.product-grid .add-to-cart{
+    color: #fff;
+    background: var(--main-color);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 50px;
+    opacity: 0;
+    position: absolute;
+    bottom: 6px;
+    left: 10px;
+    transition: all 0.3s ease-in-out;
+}
+.product-grid .add-to-cart:hover{
+    color: #fff;
+    background: #444;
+}
+.product-grid:hover .add-to-cart{
+    opacity: 1;
+    transform: translateY(-16px);
+}
+.product-grid .add-to-cart:before,
+.product-grid .add-to-cart:after{
+    content: attr(data-tip);
+    color: #fff;
+    background: #444;
+    font-size: 12px;
+    line-height: 22px;
+    padding:5px 10px;
+    white-space: nowrap;
+    display:none;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    top: -42px;
+}
+.product-grid .add-to-cart:after{
+    content: '';
+    height: 15px;
+    width: 15px;
+    transform: translateX(-50%) rotate(45deg);
+    top: -22px;
+    z-index: -1;
+}
+.product-grid .add-to-cart:hover:before,
+.product-grid .add-to-cart:hover:after{
+    display:block;
+}
+@media only screen and (max-width:990px){
+    .product-grid{ margin-bottom: 30px; }
+}
+
+h1 {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: #080808;
+  -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+h1 span {
+  display: block;
+  font-size: 0.5em;
+  line-height: 1.3;
+}
+h1 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+
+
+.twelve h1 {
+  font-size:26px; font-weight:700;  letter-spacing:1px; text-transform:uppercase; width:160px; text-align:center; margin:auto; white-space:nowrap; padding-bottom:13px;
+}
+.twelve h1:before {
+    background-color: #c50000;
+    content: '';
+    display: block;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 5px;
+}
+.twelve h1:after {
+    background-color: #c50000;
+    content: '';
+    display: block;
+  position:absolute; right:0; bottom:0;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 0.25em;
+}
+
+.eight h1 {
+  text-align:center;
+ 
+  text-transform:uppercase;
+  font-size:26px; letter-spacing:1px;
+  
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 16px 0;
+  grid-gap: 22px;
+}
+
+.eight h1:after,.eight h1:before {
+  content: " ";
+  display: block;
+  border-bottom: 2px solid #ccc;
+  background-color:#f8f8f8;
+}
+
+.eight h1 {
+  text-align:center;
+ 
+  text-transform:uppercase;
+  font-size:26px; letter-spacing:1px;
+  
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 16px 0;
+  grid-gap: 22px;
+}
+
+.eight h1:after,.eight h1:before {
+  content: " ";
+  display: block;
+  border-bottom: 2px solid #ccc;
+  background-color:#f8f8f8;
+}
+
+
+
+</style>
+       
+{{!-- GGGGGGGGGGGGGGGGGGgggggggggg --}}
+
+
+
+
+
+    
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container-fluid mt-5">
+
+  <!-- Footer -->
+  <footer
+          class="text-center text-lg-start text-white"
+          style="background-color: #1c2331"
+          >
+    <!-- Section: Social media -->
+    <section
+             class="d-flex justify-content-between p-4"
+             style="background-color: #1c2331"
+             >
+      <!-- Left -->
+      <div class="me-5">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+
+      <!-- Right -->
+      <div>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold">Company name</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p>
+              Here you can use rows and columns to organize your footer
+              content. Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto ">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Products</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p>
+              <a href="#!" class="text-white">shirts</a>
+            </p>
+            <p>
+              <a href="#!" class="text-white">pants</a>
+            </p>
+            <p>
+              <a href="#!" class="text-white">T-shirts</a>
+            </p>
+            <p>
+              <a href="#!" class="text-white">shoes</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto ">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Useful links</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p>
+              <a href="#!" class="text-white">Your Account</a>
+            </p>
+            <p>
+              <a href="#!" class="text-white">Become an Affiliate</a>
+            </p>
+            <p>
+              <a href="#!" class="text-white">Shipping Rates</a>
+            </p>
+            <p>
+              <a href=" https://api.whatsapp.com/send?phone=7034515384&text=Hi Asif" class="text-white">Help</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Contact</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-envelope mr-3"></i> menscart@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> +91 7034515384</p>
+            <p><i class="fas fa-print mr-3"></i> +91 7034515384</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div
+         class="text-center p-3"
+         style="background-color: rgba(0, 0, 0, 0.2)"
+         >
+      © 2020 Copyright:
+      <a class="text-white" href="https://menscart.com/">Menscart.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+</div>
+<!-- End of .container -->
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function addToCart(proId){
+    swal({
+  text: 'Are you sure want to Add wishilist ',
+  icon:"warning",
+  button: true,
+  dangerMode:true,
+  
+})
+.then((name) => {
+    if(name){
+      $.ajax({
+            url:'/add-to-cart/'+proId,
+                method:'get',
+            success:(response)=>{
+                if(response.status){
+                        let count=$('#cartCount').html()
+                        count=parseInt(count)+1
+                        $("#cartCount").html(count)
+                    }  
+              
+
+               swal("Status Updated",{icon:"success"})
+               
+              }
+            })
+        }
+  
+})
+}
+
+function addWishlist(proId,userId){
+      swal({
+  text: 'Are you sure want to Add wishilist ',
+  icon:"warning",
+  button: true,
+  dangerMode:true,
+  
+})
+.then((name) => {
+    if(name){
+    $.ajax({
+        url:'/add-wishilist',
+        data:{
+            proId:proId,
+            userId:userId,
+        },
+        method:'post',
+        success:(response)=>{
+            if(response.status){
+                let Wcount=$('#wishilistCount').html()
+                Wcount=parseInt(Wcount)+1
+                $("#wishilistCount").html(Wcount)
+                swal("Status Updated",{icon:"success"})
+            }
+        }
+})
+    }
+})
+}
+    </script>

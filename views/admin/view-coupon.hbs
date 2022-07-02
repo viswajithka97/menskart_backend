@@ -1,0 +1,115 @@
+
+<section class="vh-100 gradient-custom" style="background-color: rgb(174, 244, 244);">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-light text-dark" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+              <form action="/admin/view-coupon" method="post" enctype="multipart/form-data">
+              <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-uppercase">ADD COUPON</h2>
+
+                <div class="form-outline form-white mt-4 mb-4">
+
+                 
+                </div>
+
+                <div class="col">
+                
+              <input type="text" class="form-control" name="coupon" id="coupon" placeholder="enter coupon code">
+             
+            </div>
+            <div class="col mt-3">
+            
+              <input type="text" class="form-control" name="discount" id="discount" placeholder="enter Offer">
+            </div>
+            <div class="col mt-3">
+              <label>Start Date:</label>
+              <input type="date" name="startDate" id="startDate" onchange="getStartDate()">
+            </div>
+            <div class="col mt-3">
+             <label>End Date:</label>
+              <input type="date" name="expiryDate" id="expiryDate">
+            </div>
+                <button
+                  type="submit"
+                  class="btn btn-dark text-light mt-3"  
+                  onclick="return confirm('Are You Want to Add this coupon ?')"
+                >Submit</button>
+
+              </div>
+
+              <div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section>
+    <div class="container mt-5">
+       
+        <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">no</th>
+       <th scope="col">coupon number</th>
+       <th scope="col">offer Percentage</th>
+      <th scope="col">start date</th>
+        <th scope="col">End date</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each coupon}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.coupon}}</td>
+     <td>{{this.discount}}%</td>
+      <td> {{this.startDate}}</td>
+      <td>{{this.expiryDate}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+    </div>
+    
+</section>
+
+<script>
+    
+  $(function () {
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
+
+    var maxDate = year + '-' + month + '-' + day;
+    $('#startDate').attr('min', maxDate);
+  });
+  function getStartDate() {
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
+
+    var maxDate = year + '-' + month + '-' + day;
+
+    let startDate = document.getElementById('startDate').value
+    document.getElementById('expiryDate').setAttribute('min', startDate)
+  }
+
+</script>

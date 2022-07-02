@@ -1,0 +1,37 @@
+<section>
+    <div class="container mt-5">
+       
+        <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">no</th>
+       <th scope="col">brand</th>
+      <th scope="col">category</th>
+      
+        <th scope="col">image</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each category}}
+    <tr>
+      <th scope="row">1</th>
+     
+
+      <td>{{this.category}}
+      </td>
+       
+       <td><img style="width: 50px; hieght: 50px;" src="/category-image/{{this._id}}.jpg" alt="">
+         
+      </td>
+      <td>
+           <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a>
+        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are You Want to Delete {{this.name}}?')">delete</a>
+      </td>
+    </tr>
+    
+  {{/each}}
+  </tbody>
+</table>
+    </div>
+    
+</section>

@@ -1,0 +1,37 @@
+<div class="container mt-5">
+<table class="table ">
+   
+  <thead class="table-dark">
+     <tr>
+      <th scope="col">name</th>
+       <th scope="col">email</th>
+      <th scope="col">phoneNumber</th>
+      <th scope="col">password</th>
+        <th scope="col">Options</th>
+        <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+       {{#each users}}
+    <tr class="table-active">
+      <td class="table-light">{{this.name}}</td>
+      <td class="table-dark">{{this.email}}</td>
+       <td class="table-light">{{this.phoneNumber}}</td>
+       <td class="table-dark">{{this.password}}</td>
+      
+       <td class="table-light">
+          {{#if this.userBlock}}
+      <a href="/admin/unblock-user/{{this._id}}" class="btn btn-success">Unblock</a>
+    {{else}}
+      <a href="/admin/block-user/{{this._id}}" class="btn btn-primary">block</a>
+      </td>
+      {{/if}}
+      
+          <td class="table-dark"><a href="/admin/delete-users/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are You Want to delete user?')">Delete</a></td>
+
+    </tr>
+    {{/each}}
+   
+  </tbody>
+</table>
+</div>

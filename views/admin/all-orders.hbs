@@ -1,0 +1,68 @@
+<div class="container mt-5">
+<table class="table ">
+   
+  <thead class="table-dark">
+     <tr>
+      <th scope="col">userDetails</th>
+      <th scope="col">Date</th>
+       <th scope="col">deliveryAddress</th>
+      <th scope="col">paymentMethode</th>
+       <th scope="col">payment</th>
+      <th scope="col">TotalAmount</th>
+        <th scope="col">Details</th>
+        <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+       {{#each orders}}
+    <tr class="table-active">
+      <td class="table-light">{{this.user}}</td>
+      <td class="table-dark">{{this.date}}</td>
+       <td class="table-light">{{this.deliveryDetails.address}}<br>
+         {{this.deliveryDetails.state}},{{this.deliveryDetails.city}}<br>
+         {{this.deliveryDetails.pincode}},{{this.deliveryDetails.mobile}}
+       </td>
+       <td class="table-dark">{{this.paymentMethode}}</td>
+         <td class="table-dark">{{this.payment}}</td>
+        <td class="table-light">{{this.totalAmount}}</td>
+        <td class="table-dark"><a href="/admin/order-product-details/{{this._id}}" class="btn btn-primary"> Details</a></td>
+        <td class="table-dark"> 
+          {{#if canceled}}
+          <button class="btn btn-danger">order canceled</button>
+          {{else if Delived}}
+          <button class="btn btn-success">order placed</button>
+           
+          {{else}}
+              <select class="form-select" onchange="updateStatus(value,'{{this._id}}')" aria-label=".form-select-lg example" name="status">
+                      <option Selected>{{this.status}}</option>
+                      <option value="order confirmed">Order Confirmed</option>
+                      <option value="shipped">shipped</option>
+                      <option value="Arriving">Arriving</option>
+                      <option value="Delived">Delivered</option>
+                      <option value="canceled">cancelled</option>            
+              </select>
+              {{/if}}
+                 </td>
+    </tr>
+    {{/each}}
+   
+  </tbody>
+</table>
+</div>
+<script>
+    function updateStatus(value,orderrId){
+        $.ajax({
+            url:'/admin/updateStatus',
+            data:{
+                status:value,
+                orderId:orderrId
+            },
+            method:'post',
+            success:(response)=>{
+              location.reload()
+            }
+        
+        })
+    }
+</script>
+

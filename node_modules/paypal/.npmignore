@@ -1,0 +1,5 @@
+*.sw[a-z]
+node_modules/
+*.DS_Store
+set-env-vars
+*~

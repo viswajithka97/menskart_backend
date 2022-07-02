@@ -1,0 +1,138 @@
+{{!-- <section>
+    <div class="container">
+    <div class="row">
+      <h2>edit product</h2>
+        <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+  <div class="col-md-6">
+    <label for="" class="form-label">brand :</label>
+    <input type="text" name="brand" value="{{product.brand}}" class="form-control">
+  <div class="mt-3">
+    <label for="" class="form-label">category:</label>
+    <input type="text" name="category" value="{{product.category}}" class="form-control" id="exampleInputPassword1">
+  </div>
+
+ 
+     <div class="mt-3">
+    <label for="" class="form-label">Description:</label>
+    <input type="text" name="description" value="{{product.description}}" class="form-control" id="exampleInputPassword1">
+  </div>
+
+
+  <div class="mt-3">
+    <label for="" class="form-label">orginal price:</label>
+    <input type="text" name="orginalPrice" value="{{product.orginalPrice}}" class="form-control" id="exampleInputPassword1">
+  </div>
+ 
+  <div class="mt-3">
+    <label for="" class="form-label">offer price:</label>
+    <input type="text" name="offerPrice" value="{{product.offerPrice}}" class="form-control" id="exampleInputPassword1">
+  </div>
+
+
+  <div class="mt-3">
+    <label for="" class="form-label">offer percentage:</label>
+    <input type="text" name="offerpercentage" value="{{product.offerpercentage}}" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="mt-3">
+    <label for="" class="form-label">image:</label>
+    <img src="/product-images/{{product._id}}.jpg" alt="" style="width: 100px; height:auto" id="imgView">
+    <input type="file" name="image"  value="{{product._id}}.jpg" class="form-control" id="exampleInputPassword1" onchange="viewImage(event)">
+  </div>
+
+  <button type="submit" class="btn btn-primary mt-3" onclick="return confirm('Are You Want to Edit This ?')">Submit</button>
+</form>
+    </div>
+    </div>
+</section>
+<script>
+  function viewImage(event){
+    document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+  }
+  )
+</script> --}}
+
+
+
+
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-light text-dark" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+              <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+              <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-uppercase">Edit PRODUCTS</h2>
+
+                <div class="form-outline form-white mt-4 mb-4">
+
+                  <select class="form-select  mb-3" aria-label=".form-select-lg example" name="category" >
+                    <option value="{{product.category}}" selected>{{product.category}}</option>
+                    {{#each category}}
+                      <option value="{{this.category}}">{{this.category}}</option>
+                    {{/each}}
+                  </select>
+
+                </div>
+
+                <div class="form-outline form-white mt-4 ">
+                  <input
+                    type="text"
+                    name="brand"
+                    class="form-control"
+                    placeholder="brand"
+                    value="{{product.brand}}"
+                    
+                  required/>
+                </div>
+
+                
+                <div class="form-outline form-white mt-4 mb-4">
+                   <input type="text" name="description" value="{{product.description}}" placeholder="description" class="form-control" id="exampleInputPassword1" required>
+                </div>
+
+
+                    <div class="form-outline form-white mt-4 mb-4">
+                       <input type="number" placeholder="Enter orginal price" value="{{product.orginalPrice}}" name="orginalPrice" class="form-control" id="exampleInputPassword1" required>
+                    </div>
+
+                    <div class="form-outline form-white mt-4 mb-4">
+                       <input type="text" value="" class="form-control" id="exampleInputPassword1" placeholder="{{product.offerPrice}}">
+
+                          </div>
+
+
+                           <div class="form-outline form-white mt-4 mb-4">
+                              <input type="text" value="{{product.offerpercentage}}" placeholder="Enter offer percentage" name="offerpercentage" class="form-control" id="exampleInputPassword1" required>
+                           </div>
+
+
+                <div class="form-outline form-white mb-4">
+                 <label for="" class="form-label">image:</label>
+    <img src="/product-images/{{product._id}}.jpg" alt="" style="width: 100px; height:auto" id="imgView">
+    <input type="file" name="image"  value="{{product._id}}.jpg" class="form-control" id="exampleInputPassword1" onchange="viewImage(event)">
+  
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-dark text-light mt-3"  
+                  onclick="return confirm('Are You Want to Edit this product ?')"
+                >Submit</button>
+
+              </div>
+
+              <div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script defer src="https://cdn.crop.guide/loader/l.js?c=NVBMQR"></script>

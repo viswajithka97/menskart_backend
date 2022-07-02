@@ -1,0 +1,48 @@
+<div class="container " style="margin-top: 10%;">
+<table id="example" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>User</th>
+                <th>Date</th>
+                <th>Methode</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders}}
+            <tr>
+                <td>{{inc @index}}</td>
+                <td>{{this.user}}</td>
+                <td>{{this.Date}}</td>
+                <td>{{this.paymentMethode}}</td>
+                <td>{{this.payment}}</td>
+                 <td>{{this.status}}</td>
+                <td>{{this.totalAmount}}</td>
+            </tr>
+           {{/each}}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+    <script>
+        $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+    </script>

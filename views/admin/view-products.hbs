@@ -1,0 +1,65 @@
+<section>
+  <div class="container mt-5">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">no</th>
+          <th scope="col">brand</th>
+          <th scope="col">category</th>
+          <th scope="col">description</th>
+          <th scope="col">orginal price</th>
+          <th scope="col">offer price</th>
+          <th scope="col">offer percentage</th>
+          <th scope="col">image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+          <tr>
+            <th scope="row">1</th>
+            <td>
+              {{this.brand}}
+            </td>
+
+            <td>{{this.category}}
+            </td>
+            <td>
+              {{this.description}}
+            </td>
+            <td>
+              {{this.orginalPrice}}
+            </td>
+
+            <td>
+              {{this.offerPrice}}
+            </td>
+            <td>
+              {{this.offerpercentage}}
+            </td>
+            <td><img
+                style="width: 50px; hieght: 50px;"
+                src="/product-images/{{this._id}}.jpg"
+                alt=""
+              />
+
+            </td>
+            <td>
+              <a
+                href="/admin/edit-product/{{this._id}}"
+                class="btn btn-primary"
+              >Edit</a>
+              <a
+                href="/admin/delete-product/{{this._id}}"
+                class="btn btn-danger"
+                onclick="return confirm('Are You Want to Delete {{this.name}}?')"
+              >delete</a>
+            </td>
+          </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+
+</section>

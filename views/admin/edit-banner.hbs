@@ -1,0 +1,63 @@
+
+<section class="vh-100 gradient-custom" style="background-color: rgb(174, 244, 244);">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-light text-dark" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+              <form action="/admin/edit-banner/{{banner._id}}" method="post" enctype="multipart/form-data">
+              <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-uppercase">EDIT BANNER</h2>
+
+                <div class="form-outline form-white mt-4 mb-4">
+
+                 
+                </div>
+
+                <div class="form-outline form-white mt-4 ">
+                  <input
+                    type="text"
+                    name="title"
+                    class="form-control text-lowercase"
+                    value="{{banner.title}}"
+                    placeholder="title"
+                   />
+                </div>
+     
+                <div class="form-outline form-white mt-4 mb-4">
+                   <input type="text" value="{{banner.description}}" name="description" placeholder="description" class="form-control" id="exampleInputPassword1" required>
+                </div>
+                             <div class="form-outline form-white mt-4 mb-4">
+                <label for="" class="form-label">image:</label>
+    <img src="/banner-images/{{banner._id}}.jpg" alt="" style="width: 100px; height:auto" id="imgView">
+    </div>
+
+                <div class="form-outline form-white mb-4">
+                  <input
+                    type="file"
+                    name="image"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-dark text-light mt-3"  
+                 
+                >Submit</button>
+
+              </div>
+
+              <div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
