@@ -98,7 +98,8 @@ router.post("/signup", (req, res) => {
     } else {
       userHelpers.doSignup(req.body).then((response) => {
         console.log(response);
-        res.redirect("/login");
+        req.send({response})
+        // res.redirect("/login");
       });
     }
   });
@@ -114,17 +115,20 @@ router.post("/login", (req, res) => {
         req.session.loggedIn = true;
         req.session.user = response.user;
         console.log(req.session.user._id);
-        res.redirect("/");
+        // res.redirect("/");
+        res.send({response})
       } else {
         req.session.loginErr = true;
         res.redirect("/login");
+        res.send({"error":true})
       }
     }
   });
 });
 router.get("/logout", (req, res) => {
   req.session.destroy();
-  res.redirect("/");
+  // res.redirect("/");
+  res.send({logOut:true})
 });
 
 //cart routes
