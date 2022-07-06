@@ -286,22 +286,22 @@ router.get("/resent-otp/:phone", (req, res) => {
 });
 
 //category view
-router.get("/category-view/:id", verifylogin, async (req, res) => {
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
-    var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
-    );
-  }
+router.get("/category-view/:id",async (req, res) => {
+  // if (req.session.user) {
+  //   var cartCount = await userHelpers.getCarCount(req.session.user._id);
+  //   var wishilistCount = await userHelpers.getwishilistCount(
+  //     req.session.user._id
+  //   );
+  // }
   let category = req.params.id;
   userHelpers.categoryView(category).then((products) => {
     console.log(products);
     res.send({
       products,
-      wishilistCount,
-      cartCount,
-      user: req.session.user,
-      userId: req.session.user._id,
+      // wishilistCount,
+      // cartCount,
+      // user: req.session.user,
+      // userId: req.session.user._id,
     });
   });
 });
