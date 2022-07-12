@@ -21,13 +21,13 @@ paypal.configure({
     "EGfQMX-V6lOvdavJPhPRfMOgNaX0uLv4t7SBX5WjifiRCFYA1dkHrE4qUDs0DrQleLw0L8-NknNikDep",
 });
 
-const verifylogin = (req, res, next) => {
-  if (req.session.user) {
-    next();
-  } else {
-    res.redirect("/login");
-  }
-};
+// const verifylogin = (req, res, next) => {
+//   if (req.session.user) {
+//     next();
+//   } else {
+//     res.redirect("/login");
+//   }
+// };
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -43,7 +43,7 @@ router.get("/", async function (req, res, next) {
   today = yyyy + "-" + mm + "-" + dd;
   console.log("aaa", today);
 
-  userHelpers.updatedatef(today).then((response) => {});
+  userHelpers.updatedatef(today).then((response) => { });
   if (req.session.user) {
     var cartCount = await userHelpers.getCarCount(req.session.user._id);
     var wishilistCount = await userHelpers.getwishilistCount(
@@ -98,7 +98,7 @@ router.post("/signup", (req, res) => {
     } else {
       userHelpers.doSignup(req.body).then((response) => {
         console.log(response);
-        req.send({response})
+        req.send({ response })
         // res.redirect("/login");
       });
     }
@@ -116,11 +116,11 @@ router.post("/login", (req, res) => {
         req.session.user = response.user;
         console.log(req.session.user._id);
         // res.redirect("/");
-        res.send({response})
+        res.send({ response })
       } else {
         req.session.loginErr = true;
         res.redirect("/login");
-        res.send({"error":true})
+        res.send({ "error": true })
       }
     }
   });
@@ -128,11 +128,11 @@ router.post("/login", (req, res) => {
 router.get("/logout", (req, res) => {
   req.session.destroy();
   // res.redirect("/");
-  res.send({logOut:true})
+  res.send({ logOut: true })
 });
 
 //cart routes
-router.get("/cart", verifylogin, async (req, res) => {
+router.get("/cart", async (req, res) => {
   let products = await userHelpers.getCartProducts(req.session.user?._id);
   let totalValue = await userHelpers.getTotalAmount(req.session.user?._id);
   req.session.total = totalValue - req.session.discount;
@@ -286,7 +286,7 @@ router.get("/resent-otp/:phone", (req, res) => {
 });
 
 //category view
-router.get("/category-view/:id",async (req, res) => {
+router.get("/category-view/:id", async (req, res) => {
   // if (req.session.user) {
   //   var cartCount = await userHelpers.getCarCount(req.session.user._id);
   //   var wishilistCount = await userHelpers.getwishilistCount(
@@ -314,18 +314,18 @@ router.post("/change-product-quantity", async (req, res, next) => {
     let price = await userHelpers.getTotalAmount(req.body.user);
     req.session.total = price - req.session.discount;
     response.total = req.session.total;
-    res.send({response});
+    res.send({ response });
   });
 });
 router.post("/remove-product-cart", (req, res) => {
   userHelpers.removeCartProduct(req.body).then((response) => {
-    res.send({response});
+    res.send({ response });
   });
 });
 
 //product orders
 
-router.get("/place-order", verifylogin, async (req, res) => {
+router.get("/place-order", async (req, res) => {
   let total = await userHelpers.getTotalAmount(req.session.user._id);
   req.session.total = total - req.session.discount;
   let price = req.session.total;
@@ -362,7 +362,7 @@ router.get("/place-order", verifylogin, async (req, res) => {
     });
   }
 });
-router.post("/place-order", verifylogin, async (req, res) => {
+router.post("/place-order", async (req, res) => {
   console.log(req.body, "hggggggggggggggggggggggggggggggggggggggggggg");
   let products = await userHelpers.getCartProductList(req.body.userId);
   let totalPrice = await userHelpers.getTotalAmount(req.body.userId);
@@ -386,7 +386,7 @@ router.post("/place-order", verifylogin, async (req, res) => {
           .generateRazorpay(oderId, req.session.total)
           .then((response) => {
             console.log("djjd" + response);
-            res.send({response});
+            res.send({ response });
           });
       } else {
         console.log("entered to paypal");
@@ -445,7 +445,7 @@ router.post("/place-order", verifylogin, async (req, res) => {
       }
     });
 
-  router.get("/order-success", verifylogin, async (req, res) => {
+  router.get("/order-success", async (req, res) => {
     req.session.discount = 0;
     if (req.session.user) {
       var cartCount = await userHelpers.getCarCount(req.session.user._id);
@@ -465,7 +465,7 @@ router.post("/place-order", verifylogin, async (req, res) => {
   console.log(req.body);
 });
 
-router.get("/orders", verifylogin, async (req, res) => {
+router.get("/orders", async (req, res) => {
   if (req.session.user) {
     var cartCount = await userHelpers.getCarCount(req.session.user._id);
     var wishilistCount = await userHelpers.getwishilistCount(
@@ -482,7 +482,7 @@ router.get("/orders", verifylogin, async (req, res) => {
     wishilistCount,
   });
 });
-router.get("/view-order-products/:id", verifylogin, async (req, res) => {
+router.get("/view-order-products/:id", async (req, res) => {
 
   console.log("Arshu", req.params.id);
   if (req.session.user) {
@@ -503,7 +503,7 @@ router.get("/view-order-products/:id", verifylogin, async (req, res) => {
 
 // add wishilist
 
-router.post("/add-wishilist", verifylogin, (req, res) => {
+router.post("/add-wishilist", (req, res) => {
   console.log(req.body);
   let user = req.body.userId;
   let poroduct = req.body.proId;
@@ -514,38 +514,40 @@ router.post("/add-wishilist", verifylogin, (req, res) => {
     res.send({ status: true });
   });
 });
-router.get("/wishilist-view", verifylogin, async (req, res) => {
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+
+router.get("/wishilist-view/:id", async (req, res) => {
+  const userId = req.params.id;
+  if (userId) {
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
+      userId
     );
   }
 
   console.log(req.session.user?._id);
   let wishilistItems = await userHelpers.getwishilistProducts(
-    req.session.user?._id
+    userId
   );
   console.log(wishilistItems);
   if (wishilistCount == 0) {
     res.send({
       wishilistItems,
-      userId: req.session.user?._id,
-      user: req.session.user,
+      userId: userId,
+      // user: req.session.user,
       cartCount,
       wishilistCount,
     });
   } else {
     res.send({
       wishilistItems,
-      userId: req.session.user?._id,
-      user: req.session.user,
+      userId: userId,
+      // user: req.session.user,
       cartCount,
       wishilistCount,
     });
   }
 });
-router.post("/cancel-orders", verifylogin, (req, res) => {
+router.post("/cancel-orders", (req, res) => {
   console.log("gjhghgfhj");
   let oderId = req.body.orderId;
   console.log(oderId);
@@ -554,7 +556,7 @@ router.post("/cancel-orders", verifylogin, (req, res) => {
   });
 });
 
-router.post("/verify-payment", verifylogin, (req, res) => {
+router.post("/verify-payment", (req, res) => {
   let body = req.body;
 
   userHelpers
@@ -571,7 +573,7 @@ router.post("/verify-payment", verifylogin, (req, res) => {
       res.send({ status: "Payment failed" });
     });
 });
-router.get("/user-profile", verifylogin, async (req, res) => {
+router.get("/user-profile", async (req, res) => {
   if (req.session.user) {
     var cartCount = await userHelpers.getCarCount(req.session.user._id);
     var wishilistCount = await userHelpers.getwishilistCount(
@@ -591,7 +593,7 @@ router.get("/user-profile", verifylogin, async (req, res) => {
     wishilistCount,
   });
 });
-router.get("/add-address", verifylogin, async (req, res) => {
+router.get("/add-address", async (req, res) => {
   if (req.session.user) {
     var cartCount = await userHelpers.getCarCount(req.session.user._id);
     var wishilistCount = await userHelpers.getwishilistCount(
@@ -607,7 +609,7 @@ router.get("/add-address", verifylogin, async (req, res) => {
     user,
   });
 });
-router.post("/add-address", verifylogin, (req, res) => {
+router.post("/add-address", (req, res) => {
   console.log(req.body);
   userHelpers.addAddress(req.body).then((response) => {
     console.log(response);
@@ -677,7 +679,7 @@ router.get("/add-new-address", async (req, res) => {
   });
 });
 router.post("/add-new-address", async (req, res) => {
-  userHelpers.addAddress(req.body).then((response) => {});
+  userHelpers.addAddress(req.body).then((response) => { });
   console.log(req.body);
   let products = await userHelpers.getCartProductList(req.body.userId);
 
@@ -698,7 +700,7 @@ router.post("/add-new-address", async (req, res) => {
         console.log(totalPrice);
         userHelpers.generateRazorpay(oderId, totalPrice).then((response) => {
           console.log("djjd" + response);
-          res.send({response});
+          res.send({ response });
         });
       } else {
         console.log("paypal");
@@ -802,7 +804,7 @@ router.get("/update-profilepic", (req, res) => {
   let userid = req.session.user._id;
   req.session.user.profile = false;
   userHelpers.updatepic(userid).then((response) => {
-    res.send({response});
+    res.send({ response });
   });
 });
 router.post("/change-Phonenumber", (req, res) => {
@@ -870,7 +872,7 @@ router.post("/applycoupon", async (req, res) => {
       });
     }
   } else {
-    res.send({response});
+    res.send({ response });
   }
 });
 router.post("/change-Password", (req, res) => {
@@ -879,7 +881,7 @@ router.post("/change-Password", (req, res) => {
   console.log(userID);
   userHelpers.checkPassword(userID, req.body).then((response) => {
     console.log(response);
-    res.send({response});
+    res.send({ response });
   });
 });
 
