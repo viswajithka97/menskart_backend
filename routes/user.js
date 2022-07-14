@@ -21,14 +21,6 @@ paypal.configure({
     "EGfQMX-V6lOvdavJPhPRfMOgNaX0uLv4t7SBX5WjifiRCFYA1dkHrE4qUDs0DrQleLw0L8-NknNikDep",
 });
 
-// const verifylogin = (req, res, next) => {
-//   if (req.session.user) {
-//     next();
-//   } else {
-//     res.redirect("/login");
-//   }
-// };
-
 /* GET home page. */
 router.get("/", async function (req, res, next) {
   let user = req.session.user;
@@ -38,7 +30,7 @@ router.get("/", async function (req, res, next) {
   wishilistCount = null;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var mm = String(today.getMonth() + 1).padStart(2, "0");
   var yyyy = today.getFullYear();
   today = yyyy + "-" + mm + "-" + dd;
   console.log("aaa", today);
@@ -132,16 +124,17 @@ router.get("/logout", (req, res) => {
 });
 
 //cart routes
-router.get("/cart", async (req, res) => {
-  let products = await userHelpers.getCartProducts(req.session.user?._id);
-  let totalValue = await userHelpers.getTotalAmount(req.session.user?._id);
+router.get("/cart/:id", async (req, res) => {
+  const userId = req.params.id;
+  let products = await userHelpers.getCartProducts(userId);
+  let totalValue = await userHelpers.getTotalAmount(userId);
   req.session.total = totalValue - req.session.discount;
   console.log("ammen", req.session.total, totalValue, req.session.discount);
 
   let total = req.session.total;
   cartCount = null;
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+  if (userId) {
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
       req.session.user._id
     );
@@ -149,7 +142,6 @@ router.get("/cart", async (req, res) => {
   if (cartCount == 0) {
     res.send({
       products,
-      user: req.session.user,
       cartCount,
       total,
       wishilistCount,
@@ -157,7 +149,6 @@ router.get("/cart", async (req, res) => {
   } else {
     res.send({
       products,
-      user: req.session.user,
       cartCount,
       total,
       wishilistCount,
@@ -180,19 +171,14 @@ router.get("/view-image/:id", async (req, res) => {
 
   let relProduct = product.category;
   let relatedProduct = await userHelpers.relatedDetails(relProduct);
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
-    var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
-    );
-  }
+
   res.send({
     product,
     wishilistCount,
     cartCount,
-    user: req.session.user,
+    // user: req.session.user,
     relatedProduct,
-    userId: req.session.user?._id,
+    // userId: req.session.user?._id,
   });
 });
 
@@ -325,18 +311,19 @@ router.post("/remove-product-cart", (req, res) => {
 
 //product orders
 
-router.get("/place-order", async (req, res) => {
-  let total = await userHelpers.getTotalAmount(req.session.user._id);
+router.get("/place-order/:id", async (req, res) => {
+  const userId = req.params.id;
+  let total = await userHelpers.getTotalAmount(userId);
   req.session.total = total - req.session.discount;
   let price = req.session.total;
   let discount = req.session.discount;
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+  if (userId) {
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
       req.session.user._id
     );
   }
-  let userId = req.session.user._id;
+  // let userId = req.session.user._id;
   let user = req.session.user;
   let address = await userHelpers.getAddress(userId);
   console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
@@ -354,7 +341,7 @@ router.get("/place-order", async (req, res) => {
   } else {
     res.send({
       price: req.session.total,
-      user: req.session.user,
+      user: userId,
       cartCount,
       wishilistCount,
       address,
@@ -362,14 +349,16 @@ router.get("/place-order", async (req, res) => {
     });
   }
 });
-router.post("/place-order", async (req, res) => {
+router.post("/place-order/:id", async (req, res) => {
+  const userId = req.params.id;
+
   console.log(req.body, "hggggggggggggggggggggggggggggggggggggggggggg");
-  let products = await userHelpers.getCartProductList(req.body.userId);
-  let totalPrice = await userHelpers.getTotalAmount(req.body.userId);
+  let products = await userHelpers.getCartProductList(userId);
+  let totalPrice = await userHelpers.getTotalAmount(userId);
   let total = totalPrice - req.session.discount;
   let userName = req.session.user.name;
   let address = await userHelpers.EditAddress(
-    req.body.userId,
+    userId,
     req.body.checkoutAddress
   );
   let deliveryAddress = address[0].Address;
@@ -445,19 +434,20 @@ router.post("/place-order", async (req, res) => {
       }
     });
 
-  router.get("/order-success", async (req, res) => {
+  router.get("/order-success/:id", async (req, res) => {
+    const userId = req.params.id;
     req.session.discount = 0;
-    if (req.session.user) {
-      var cartCount = await userHelpers.getCarCount(req.session.user._id);
+    if (userId) {
+      var cartCount = await userHelpers.getCarCount(userId);
       var wishilistCount = await userHelpers.getwishilistCount(
-        req.session.user._id
+        userId
       );
     }
     var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
+      userId
     );
     res.send({
-      user: req.session.user,
+      user: userId,
       cartCount,
       wishilistCount,
     });
@@ -465,36 +455,37 @@ router.post("/place-order", async (req, res) => {
   console.log(req.body);
 });
 
-router.get("/orders", async (req, res) => {
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+router.get("/orders/:id", async (req, res) => {
+  const userId = req.params.id;
+  if (userId) {
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
+      userId
     );
   }
   console.log(req.session.user?._id);
-  let orders = await userHelpers.getUserOrders(req.session.user?._id);
+  let orders = await userHelpers.getUserOrders(userId);
 
   res.send({
-    user: req.session.user,
+    user: userId,
     orders,
     cartCount,
     wishilistCount,
   });
 });
 router.get("/view-order-products/:id", async (req, res) => {
-
+  const userId = req.params.id;
   console.log("Arshu", req.params.id);
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+  if (userId) {
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
+      ruserId
     );
   }
-  let products = await userHelpers.getOrderProducts(req.params.id);
+  let products = await userHelpers.getOrderProducts(userId);
   console.log(products);
   res.send({
-    user: req.session.user,
+    user: userId,
     products,
     wishilistCount,
     cartCount,
@@ -503,8 +494,9 @@ router.get("/view-order-products/:id", async (req, res) => {
 
 // add wishilist
 
-router.post("/add-wishilist", (req, res) => {
+router.post("/add-wishilist/Iid", (req, res) => {
   console.log(req.body);
+  // const userId = req.body.userId;
   let user = req.body.userId;
   let poroduct = req.body.proId;
   console.log("uhgfh");
@@ -573,14 +565,15 @@ router.post("/verify-payment", (req, res) => {
       res.send({ status: "Payment failed" });
     });
 });
-router.get("/user-profile", async (req, res) => {
-  if (req.session.user) {
+router.get("/user-profile/:id", async (req, res) => {
+  const userId = req.params.id;
+  if (userId) {
     var cartCount = await userHelpers.getCarCount(req.session.user._id);
     var wishilistCount = await userHelpers.getwishilistCount(
       req.session.user._id
     );
   }
-  let userId = req.session.user._id;
+  // let userId = req.session.user._id;
   let address = await userHelpers.getAddress(userId);
   console.log("hjvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
   console.log(req.session.user);
@@ -593,17 +586,17 @@ router.get("/user-profile", async (req, res) => {
     wishilistCount,
   });
 });
-router.get("/add-address", async (req, res) => {
-  if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+router.get("/add-address/:id", async (req, res) => {
+  if (userId) {
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
+      userId
     );
   }
-  let userId = req.session.user._id;
+  // let userId = req.session.user._id;
   let user = req.session.user;
   res.send({
-    userId: req.session.user._id,
+    userId: userId,
     wishilistCount,
     cartCount,
     user,
@@ -619,14 +612,14 @@ router.post("/add-address", (req, res) => {
 router.get("/edit-address/:id", async (req, res) => {
   let addressId = req.params.id;
   console.log(addressId);
-  let userId = req.session.user?._id;
+  let userId = req.body.userId;
   let address = await userHelpers.EditAddress(userId, addressId);
   console.log("jjjjjjjjjjjjjjjjjjjjjjjjjj");
   res.send({ address });
 });
 router.post("/edit-address/:id", (req, res) => {
   let addressId = req.params.id;
-  let userId = req.session.user._id;
+  let userId = req.body.userId;
   let data = req.body;
   console.log(addressId);
   console.log(req.body);
@@ -637,7 +630,7 @@ router.post("/edit-address/:id", (req, res) => {
 });
 router.get("/delete-address/:id", (req, res) => {
   let addressId = req.params.id;
-  let userID = req.session.user._id;
+  let userID = req.body.userId;
   userHelpers.deleteAddress(userID, addressId).then((resp) => {
     console.log(resp);
     res.redirect("/user-profile");
@@ -656,18 +649,19 @@ router.post("/edit-profile/:id", (req, res) => {
     res.redirect("/");
   });
 });
-router.get("/add-new-address", async (req, res) => {
-  let total = await userHelpers.getTotalAmount(req.session.user._id);
+router.get("/add-new-address/:id", async (req, res) => {
+  let userId = req.params.id;
+  let total = await userHelpers.getTotalAmount(userId);
   let discount = req.session.discount;
   req.session.total = total - req.session.discount;
   let price = req.session.total;
   if (req.session.user) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
       req.session.user._id
     );
   }
-  let userId = req.session.user._id;
+  // let userId = req.session.user._id;
   let user = req.session.user;
   res.send({
     price,
