@@ -30,7 +30,7 @@ router.get("/", async function (req, res, next) {
   wishilistCount = null;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0");         
   var yyyy = today.getFullYear();
   today = yyyy + "-" + mm + "-" + dd;
   console.log("aaa", today);
