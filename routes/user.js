@@ -323,7 +323,6 @@ router.get("/place-order/:id", async (req, res) => {
       req.session.user._id
     );
   }
-  // let userId = req.session.user._id;
   let user = req.session.user;
   let address = await userHelpers.getAddress(userId);
   console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
