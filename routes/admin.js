@@ -73,10 +73,11 @@ router.get("/add-product", async (req, res) => {
 });
 router.post("/add-product", (req, res) => {
   productHelper.addproduct(req.body, (id) => {
+    cons
     let image = req.files.image;
     let image2 = req.files?.image2;
     let image3 = req.files?.image3;
-
+console.log(image,image2,image3, "koiiiiiiiiiiii");
     image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
       if (!err) {
         res.send({ admin: true });
