@@ -30,7 +30,7 @@ router.post("/admin-login", (req, res) => {
   ) {
     req.session.admin = true;
 
-    res.redirect("/admin");
+    res.send({login: true});
   } else {
     res.send({ login: true, loginadminErr: true });
   }
