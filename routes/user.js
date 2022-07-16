@@ -30,7 +30,7 @@ router.get("/", async function (req, res, next) {
   wishilistCount = null;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0");         
+  var mm = String(today.getMonth() + 1).padStart(2, "0");
   var yyyy = today.getFullYear();
   today = yyyy + "-" + mm + "-" + dd;
   console.log("aaa", today);
@@ -155,12 +155,14 @@ router.get("/cart/:id", async (req, res) => {
     });
   }
 });
-router.get("/add-to-cart/:id", (req, res) => {
+router.post("/add-to-cart/", (req, res) => {
+  let userId = req.body.userId;
+  let productId = req.body.productId;
   console.log(req.params.id);
   console.log("hi");
   console.log(req.session.user._id);
 
-  userHelpers.addToCart(req.params.id, req.session.user._id).then(() => {
+  userHelpers.addToCart(productId, userId).then(() => {
     res.send({ status: true });
   });
 });
