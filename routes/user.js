@@ -135,7 +135,7 @@ router.get("/cart/:id", async (req, res) => {
   // req.session.total = totalValue - req.session.discount;
   // console.log("ammen", req.session.total, totalValue, req.session.discount);
 
-  let total = req.session.total;
+  // let total = req.session.total;
   cartCount = null;
   if (userId) {
     var cartCount = await userHelpers.getCarCount(userId);
@@ -147,14 +147,14 @@ router.get("/cart/:id", async (req, res) => {
     res.send({
       products,
       cartCount,
-      total,
+      // total,
       wishilistCount,
     });
   } else {
     res.send({
       products,
       cartCount,
-      total,
+      // total,
       wishilistCount,
     });
   }
