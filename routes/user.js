@@ -158,9 +158,7 @@ router.get("/cart/:id", async (req, res) => {
 router.post("/add-to-cart/", (req, res) => {
   let userId = req.body.userId;
   let productId = req.body.productId;
-  console.log(req.params.id);
-  console.log("hi");
-  console.log(req.session.user._id);
+  console.log("id           ", userId, productId);
 
   userHelpers.addToCart(productId, userId).then(() => {
     res.send({ status: true });
