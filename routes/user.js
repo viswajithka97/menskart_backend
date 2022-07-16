@@ -125,18 +125,22 @@ router.get("/logout", (req, res) => {
 
 //cart routes
 router.get("/cart/:id", async (req, res) => {
+
   const userId = req.params.id;
+  console.log(
+    "userId", userId
+  );
   let products = await userHelpers.getCartProducts(userId);
   let totalValue = await userHelpers.getTotalAmount(userId);
-  req.session.total = totalValue - req.session.discount;
-  console.log("ammen", req.session.total, totalValue, req.session.discount);
+  // req.session.total = totalValue - req.session.discount;
+  // console.log("ammen", req.session.total, totalValue, req.session.discount);
 
   let total = req.session.total;
   cartCount = null;
   if (userId) {
     var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
+      userId
     );
   }
   if (cartCount == 0) {
