@@ -493,9 +493,8 @@ router.get("/view-order-products/:id", async (req, res) => {
 
 // add wishilist
 
-router.post("/add-wishilist/Iid", (req, res) => {
+router.post("/add-wishilist/", (req, res) => {
   console.log(req.body);
-  // const userId = req.body.userId;
   let user = req.body.userId;
   let poroduct = req.body.proId;
   console.log("uhgfh");
