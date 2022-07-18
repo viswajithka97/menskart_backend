@@ -72,7 +72,7 @@ router.get("/add-product", async (req, res) => {
   res.send({ admin: true, category });
 });
 router.post("/add-product", (req, res) => {
-  productHelper.addproduct(req.body, () => {
+  productHelper.addproduct(req.body, (id) => {
    console.log("id--------",id);
  
     let image = req.files.image;
