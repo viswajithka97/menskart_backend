@@ -88,12 +88,15 @@ console.log(image,image2,image3, "koiiiiiiiiiiii");
     });
 
     image2.mv("./public/product-images2/" + id + ".jpg", (err, done) => {
-      console.log(err,"error");
-      console.log(done,"done");
+    if(err){
+      res.send({ success: false });
+      
+    }
      });
     image3.mv("./public/product-images3/" + id + ".jpg", (ree, done) => { 
-      console.log("errrrrrr",ree);
-      console.log("done",done);
+      if(ree){
+        res.send({ success: false });
+      }
     });
     res.send({ success: true });
 
