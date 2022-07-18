@@ -32,7 +32,7 @@ module.exports = {
                     { _id: objectId(ids) },
                     { $set: { offerPrice: offerPrice } }
                 );
-            // console.log(data);
+            console.log(data.insertedId,"ahi asif welcome");
             callback(data.insertedId)
         })
 

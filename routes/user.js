@@ -308,6 +308,7 @@ router.post("/change-product-quantity", async (req, res, next) => {
   });
 });
 router.post("/remove-product-cart", (req, res) => {
+  // const prodId = req.body;
   userHelpers.removeCartProduct(req.body).then((response) => {
     res.send({ response });
   });

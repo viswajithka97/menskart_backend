@@ -74,6 +74,7 @@ router.get("/add-product", async (req, res) => {
 router.post("/add-product", (req, res) => {
   productHelper.addproduct(req.body, () => {
    console.log("id--------",id);
+ 
     let image = req.files.image;
     let image2 = req.files?.image2;
     let image3 = req.files?.image3;
