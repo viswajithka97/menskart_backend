@@ -92,12 +92,17 @@ router.post("/add-product", (req, res) => {
     image2.mv("./public/product-images2/" + id + ".jpg", (err, done) => {
       if (err) {
         res.send({ success: false });
-
+        console.log(err, "errrrrrrrrrr");
+      } else {
+        console.log("image name", done);
       }
     });
     image3.mv("./public/product-images3/" + id + ".jpg", (ree, done) => {
       if (ree) {
+        console.log(err, "errrrrrrrrrr");
         res.send({ success: false });
+      } else {
+        console.log("image name", done);
       }
     });
     res.send({ success: true });
