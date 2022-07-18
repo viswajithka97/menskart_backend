@@ -81,9 +81,11 @@ router.post("/add-product", (req, res) => {
 console.log(image,image2,image3, "koiiiiiiiiiiii");
     image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
       if (!err) {
+        console.log("image uploaded");
         res.send({ admin: true });
       } else {
         console.log(err,"errrrrrrrrrr");
+       
       }
     });
 
