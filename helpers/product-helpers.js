@@ -32,7 +32,7 @@ module.exports = {
                     { _id: objectId(ids) },
                     { $set: { offerPrice: offerPrice } }
                 );
-            console.log(data.insertedId,"ahi asif welcome");
+            console.log(data.insertedId, "ahi asif welcome");
             callback(data.insertedId)
         })
 
@@ -438,7 +438,20 @@ module.exports = {
             let coupon = await db.get().collection(collection.COUPON_COLLECTION).find().toArray()
             resolve(coupon)
         })
-    }
+    },
+    gettrend: () => {
+        return new promise(async (resolve, reject) => {
+            let products = await db
+                .get()
+                .collection(collection.PRODUCT_COLLECTION)
+                .find()
+                .sort({ _id: -1 })
+                .limit(10)
+                .toArray();
+            console.log("hi", products);
+            resolve(products);
+        });
+    },
 
 
 

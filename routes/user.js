@@ -42,9 +42,11 @@ router.get("/", async function (req, res, next) {
       req.session.user._id
     );
   }
+  let trendingProducts = await productHelpers.gettrend();
   productHelpers.getAllBanner().then((banner) => {
     productHelpers.getAllofferproducts().then((products) => {
       productHelpers.getAllcategory().then((category) => {
+
         console.log("fgdffffffffffffffffffffdd");
         console.log(banner);
 
@@ -53,9 +55,11 @@ router.get("/", async function (req, res, next) {
           banner,
           user,
           category,
+          trendingProducts,
           cartCount,
           userId: req.session.user?._id,
           wishilistCount,
+
         });
       });
     });
