@@ -30,7 +30,7 @@ router.post("/admin-login", (req, res) => {
   ) {
     req.session.admin = true;
 
-    res.send({login: true});
+    res.send({ login: true });
   } else {
     res.send({ login: true, loginadminErr: true });
   }
@@ -73,30 +73,30 @@ router.get("/add-product", async (req, res) => {
 });
 router.post("/add-product", (req, res) => {
   productHelper.addproduct(req.body, (id) => {
-   console.log("ifffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",id);
- 
+    console.log("ifffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", id);
+
     let image = req.files.image;
     let image2 = req.files?.image2;
     let image3 = req.files?.image3;
-console.log(image,image2,image3, "koiiiiiiiiiiii");
+    console.log(image, image2, image3, "koiiiiiiiiiiii");
     image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
       if (!err) {
-        console.log("image uploaded");
+        console.log("image name", done);
         res.send({ admin: true });
       } else {
-        console.log(err,"errrrrrrrrrr");
-       
+        console.log(err, "errrrrrrrrrr");
+
       }
     });
 
     image2.mv("./public/product-images2/" + id + ".jpg", (err, done) => {
-    if(err){
-      res.send({ success: false });
-      
-    }
-     });
-    image3.mv("./public/product-images3/" + id + ".jpg", (ree, done) => { 
-      if(ree){
+      if (err) {
+        res.send({ success: false });
+
+      }
+    });
+    image3.mv("./public/product-images3/" + id + ".jpg", (ree, done) => {
+      if (ree) {
         res.send({ success: false });
       }
     });
