@@ -73,7 +73,7 @@ router.get("/add-product", async (req, res) => {
 });
 router.post("/add-product", (req, res) => {
   productHelper.addproduct(req.body, (id) => {
-   console.log("id--------",id);
+   console.log("ifffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",id);
  
     let image = req.files.image;
     let image2 = req.files?.image2;
@@ -83,12 +83,18 @@ console.log(image,image2,image3, "koiiiiiiiiiiii");
       if (!err) {
         res.send({ admin: true });
       } else {
-        console.log(err);
+        console.log(err,"errrrrrrrrrr");
       }
     });
 
-    image2.mv("./public/product-images2/" + id + ".jpg", (err, done) => { });
-    image3.mv("./public/product-images3/" + id + ".jpg", (ree, done) => { });
+    image2.mv("./public/product-images2/" + id + ".jpg", (err, done) => {
+      console.log(err,"error");
+      console.log(done,"done");
+     });
+    image3.mv("./public/product-images3/" + id + ".jpg", (ree, done) => { 
+      console.log("errrrrrr",ree);
+      console.log("done",done);
+    });
     res.send({ success: true });
 
   });
