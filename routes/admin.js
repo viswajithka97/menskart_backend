@@ -80,7 +80,7 @@ router.post("/add-product", (req, res) => {
     let image3 = req.files?.image3;
     console.log(image, image2, image3, "koiiiiiiiiiiii");
     image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
-      if (!err) {
+      if (done) {
         console.log("image name", done);
         res.send({ admin: true });
       } else {
