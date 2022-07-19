@@ -126,7 +126,7 @@ router.post("/edit-product/:id", (req, res) => {
       image.mv("./public/product-images/" + id + ".jpg", (err, done) => { });
     }
   });
-  req.send({ success: true });
+  res.send({ success: true });
 });
 router.get("/delete-product/:id", (req, res) => {
   let proId = req.params.id;
