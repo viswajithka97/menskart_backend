@@ -136,10 +136,10 @@ router.get("/cart/:id", async (req, res) => {
   );
   let products = await userHelpers.getCartProducts(userId);
   let totalValue = await userHelpers.getTotalAmount(userId);
-  // req.session.total = totalValue - req.session.discount;
+  req.session.total = totalValue - req.session.discount;
   // console.log("ammen", req.session.total, totalValue, req.session.discount);
 
-  // let total = req.session.total;
+  let total = req.session.total;
   cartCount = null;
   if (userId) {
     var cartCount = await userHelpers.getCarCount(userId);
@@ -151,14 +151,14 @@ router.get("/cart/:id", async (req, res) => {
     res.send({
       products,
       cartCount,
-      // total,
+      total,
       wishilistCount,
     });
   } else {
     res.send({
       products,
       cartCount,
-      // total,
+      total,
       wishilistCount,
     });
   }
@@ -326,23 +326,23 @@ router.get("/place-order/:id", async (req, res) => {
   req.session.total = total - req.session.discount;
   let price = req.session.total;
   let discount = req.session.discount;
-  if (userId) {
-    var cartCount = await userHelpers.getCarCount(userId);
-    var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
-    );
-  }
-  let user = req.session.user;
+  // if (userId) {
+  //   var cartCount = await userHelpers.getCarCount(userId);
+  //   var wishilistCount = await userHelpers.getwishilistCount(
+  //     req.session.user._id
+  //   );
+  // }
+  let user = userId;
   let address = await userHelpers.getAddress(userId);
   console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
   console.log(address);
-  let slectAddress = address[0];
-  if (!slectAddress) {
+  let selectAddress = address[0];
+  if (!selectAddress) {
     res.send({
       price: req.session.total,
-      cartCount,
-      wishilistCount,
-      userId,
+      // cartCount,
+      // wishilistCount,
+      // userId,
       user,
       discount,
     });
@@ -350,8 +350,8 @@ router.get("/place-order/:id", async (req, res) => {
     res.send({
       price: req.session.total,
       user: userId,
-      cartCount,
-      wishilistCount,
+      // cartCount,
+      // wishilistCount,
       address,
       discount,
     });
