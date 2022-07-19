@@ -39,7 +39,7 @@ router.post("/admin-login", (req, res) => {
 
 router.get("/admin-logout", (req, res) => {
   req.session.admin = false;
-  res.redirect("/admin");
+  res.send({ admin: false });
 });
 
 router.get("/", async function (req, res, next) {
