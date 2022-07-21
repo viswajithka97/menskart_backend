@@ -636,7 +636,7 @@ router.post("/edit-address/:id", (req, res) => {
   console.log(req.body);
   console.log(userId);
   userHelpers.updateAddress(userId, addressId, data).then((resp) => {
-    res.redirect("/user-profile");
+    res.send({ resp });
   });
 });
 router.get("/delete-address/:id", (req, res) => {
