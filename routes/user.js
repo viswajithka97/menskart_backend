@@ -577,9 +577,9 @@ router.post("/verify-payment", (req, res) => {
 router.get("/user-profile/:id", async (req, res) => {
   const userId = req.params.id;
   if (userId) {
-    var cartCount = await userHelpers.getCarCount(req.session.user._id);
+    var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
-      req.session.user._id
+      userId
     );
   }
   // let userId = req.session.user._id;
@@ -589,7 +589,7 @@ router.get("/user-profile/:id", async (req, res) => {
   let profile = address[0]?.profile;
 
   res.send({
-    user: req.session.user,
+    user: userId,
     address,
     cartCount,
     wishilistCount,
