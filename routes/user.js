@@ -613,9 +613,9 @@ router.get("/add-address/:id", async (req, res) => {
 });
 router.post("/add-address", (req, res) => {
   console.log(req.body);
-  let address = await userHelpers.addAddress(req.body).then((response) => {
-    console.log("response------------",response);
-    res.send({ address });
+  userHelpers.addAddress(req.body).then((response) => {
+    console.log("response------------", response);
+    res.send({ address: true });
 
   });
   res.send({ status: false });
