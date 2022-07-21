@@ -615,10 +615,10 @@ router.post("/add-address", (req, res) => {
   console.log(req.body);
   userHelpers.addAddress(req.body).then((response) => {
     console.log("response------------", response);
-    res.send({ address: true });
+    res.send({ response });
 
   });
-  res.send({ status: false });
+  res.send({ address: true });
 });
 router.get("/edit-address/:id", async (req, res) => {
   let addressId = req.params.id;
