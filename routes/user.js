@@ -151,6 +151,7 @@ router.get("/cart/:id", async (req, res) => {
     res.send({
       products,
       cartCount,
+      total,
       totalValue,
       wishilistCount,
     });
@@ -158,6 +159,7 @@ router.get("/cart/:id", async (req, res) => {
     res.send({
       products,
       cartCount,
+      total,
       totalValue,
       wishilistCount,
     });
@@ -594,27 +596,29 @@ router.get("/user-profile/:id", async (req, res) => {
   });
 });
 router.get("/add-address/:id", async (req, res) => {
+  const userId = req.params.id;
   if (userId) {
     var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
       userId
     );
   }
-  // let userId = req.session.user._id;
-  let user = req.session.user;
+  // let user = req.session.user;
   res.send({
     userId: userId,
     wishilistCount,
     cartCount,
-    user,
+    // user,
   });
 });
 router.post("/add-address", (req, res) => {
   console.log(req.body);
   userHelpers.addAddress(req.body).then((response) => {
     console.log(response);
+    res.send({ response });
+
   });
-  res.redirect("/user-profile");
+  res.send({ status: false });
 });
 router.get("/edit-address/:id", async (req, res) => {
   let addressId = req.params.id;
