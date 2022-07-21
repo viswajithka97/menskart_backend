@@ -618,7 +618,7 @@ router.post("/add-address", (req, res) => {
     res.send({ response });
 
   });
-  res.send({ status: true });
+  // res.send({ status: true });
 });
 router.get("/edit-address/:id", async (req, res) => {
   let addressId = req.params.id;
