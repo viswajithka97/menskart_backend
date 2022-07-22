@@ -865,7 +865,10 @@ router.post("/applycoupon/:id", async (req, res) => {
     console.log(coupon);
     let check = await userHelpers.checkuser(userId, code);
     if (check) {
-      res.send({ user: false });
+      let discountVal = ((amount * coupon.discount) / 100).toFixed();
+      req.session.discount = discountVal;
+      let offerprice = amount - discountVal;
+      res.send({ offerprice, user: false });
     } else {
       userHelpers.updatcoupon(userId, code).then((response) => {
         let discountVal = ((amount * coupon.discount) / 100).toFixed();
