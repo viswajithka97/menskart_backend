@@ -873,7 +873,7 @@ router.post("/applycoupon/:id", async (req, res) => {
         let offerprice = amount - discountVal;
         req.session.total = offerprice;
         console.log(offerprice);
-        res.send({ offerprice, user: false });
+        res.send({ offerprice, user: true });
       });
     }
   } else {
