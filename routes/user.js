@@ -858,7 +858,7 @@ router.post("/verify-otpprofile", (req, res) => {
 });
 router.post("/applycoupon/:id", async (req, res) => {
   let userId = req.params.id;
-  let amount = req.session.total;
+  let amount = req.body.total;
   let code = req.body.code;
   let coupon = await userHelpers.checkcoupon(code);
   if (coupon) {
