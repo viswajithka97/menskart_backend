@@ -856,8 +856,8 @@ router.post("/verify-otpprofile", (req, res) => {
       }
     });
 });
-router.post("/applycoupon", async (req, res) => {
-  let userId = req.session.user._id;
+router.post("/applycoupon/:id", async (req, res) => {
+  let userId = req.params.id;
   let amount = req.session.total;
   let code = req.body.code;
   let coupon = await userHelpers.checkcoupon(code);
@@ -873,7 +873,7 @@ router.post("/applycoupon", async (req, res) => {
         let offerprice = amount - discountVal;
         req.session.total = offerprice;
         console.log(offerprice);
-        res.send({ offerprice });
+        res.send({ offerprice, response });
       });
     }
   } else {

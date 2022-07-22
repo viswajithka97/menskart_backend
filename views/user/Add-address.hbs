@@ -1,269 +1,275 @@
 <body style="background-color: #d2c9ff ;">
-<div class="container">
-  {{!-- <form action="/applycoupon" id="coupon"></form> --}}
-  <form action="/place-order" id="checkout-form" >
+  <div class="container">
+    {{!-- <form action="/applycoupon" id="coupon"></form> --}}
+    <form action="/place-order" id="checkout-form">
 
-  
-<div class="row mt-4" >
-  
-  <div class="col-md-8 mb-4" >
-         <a href="/add-new-address" class="btn btn-dark text-light">Add new Address</a>
+
+      <div class="row mt-4">
+
+        <div class="col-md-8 mb-4">
+          <a href="/add-new-address" class="btn btn-dark text-light">Add new Address</a>
           {{#each address}}
-    <div class="card mb-3 mt-2">
-          <div class="form-check" style="background-color: #ffff;">
-            <div class="card-header" style="background-color:rgb(241, 234, 234);">
+          <div class="card mb-3 mt-2">
+            <div class="form-check" style="background-color: #ffff;">
+              <div class="card-header" style="background-color:rgb(241, 234, 234);">
 
-              <input class="form-check-input" type="radio" name="checkoutAddress"
-               
-                id="{{this.Address.Useraddress}}" value="{{this.Address.Useraddress}}" checked>
-              <label class="form-check-label" for="{{this.Address.Useraddress}}">
-                     {{this.Address.home}}
-              </label>
+                <input class="form-check-input" type="radio" name="checkoutAddress" id="{{this.Address.Useraddress}}"
+                  value="{{this.Address.Useraddress}}" checked>
+                <label class="form-check-label" for="{{this.Address.Useraddress}}">
+                  {{this.Address.home}}
+                </label>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{this.Address.name}}
+                  -
+                  {{this.Address.phoneNumber}}
+                </h5>
+                <p class="card-text">{{this.Address.address}}</p>
+                <p class="card-text">{{this.Address.city}}</p>
+                <p class="card-text">{{this.Address.house}}</p>
+                <p class="card-text">{{this.Address.pincode}}</p>
+                <p class="card-text">{{this.Address.phoneNumber}}</p>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+          <input type="text" value="{{user._id}}" name="userId" class="form-control" hidden />
+
+          {{!-- <div class="card mb-4">
+            <div class="card-header py-3 bg-dark">
+              <a href="/old-address" class="btn btn-primary">old address</a>
+              <h5 class="mb-0 text-light">ADD ADDRESS</h5>
+            </div>
+            <div class="card-body bg-light">
+
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form7Example1" name="name" class="form-control" />
+                    <input type="text" value="{{user._id}}" name="userId" class="form-control" hidden />
+                    <label class="form-label" for="form7Example1">Name</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form7Example2" name="phoneNumber" class="form-control" />
+                    <label class="form-label" for="form7Example2">Phone Number</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Text input -->
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form7Example3" name="state" class="form-control" />
+                    <label class="form-label" for="form7Example3">State</label>
+                  </div>
+                </div>
+
+                <!-- Text input -->
+                <div class="col">
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form7Example4" name="pincode" class="form-control" />
+                    <label class="form-label" for="form7Example4">Pincode</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Email input -->
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form7Example5" name="city" class="form-control" />
+                    <label class="form-label" for="form7Example5">City</label>
+                  </div>
+                </div>
+                <!-- Number input -->
+                <div class="col">
+                  <div class="form-outline mb-4">
+                    <input type="number" id="form7Example6" name="house" class="form-control" />
+                    <label class="form-label" for="form7Example6">House No,Building Name</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Message input -->
+              <div class="form-outline mb-4">
+                <textarea class="form-control" id="form7Example7" name="address" rows="4"></textarea>
+                <label class="form-label" for="form7Example7">Address information</label>
+              </div>
+
+              <!-- Checkbox -->
+
+            </div>
+          </div> --}}
+        </div>
+
+        <div class="col-md-4 mb-4 mt-5">
+          <div class="card mb-4" style="background-color:rgb(241, 234, 234);">
+            <div class="card-header py-3 bg-dark text-light">
+              <h5 class="mb-0">Amount</h5>
             </div>
             <div class="card-body">
-              <h5 class="card-title">{{this.Address.name}}
-                -
-                 {{this.Address.phoneNumber}}
-               </h5>
-              <p class="card-text">{{this.Address.address}}</p>
-              <p class="card-text">{{this.Address.city}}</p>
-              <p class="card-text">{{this.Address.house}}</p>
-              <p class="card-text">{{this.Address.pincode}}</p>
-              <p class="card-text">{{this.Address.phoneNumber}}</p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+                  style="background-color:rgb(241, 234, 234);">
+                  coupon amount
+                  <span> {{discount}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0"
+                  style="background-color:rgb(241, 234, 234);">
+                  Shipping
+                  <span>free</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0"
+                  style="background-color:rgb(241, 234, 234);">
+                  Delivery charge
+                  <span>free</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
+                  style="background-color:rgb(241, 234, 234);">
+                  <div>
+                    <strong>Total amount</strong>
+                    <strong>
+                      <p class="mb-0">(including GST)</p>
+                    </strong>
+                  </div>
+                  <span><strong id="price">₹{{price}}</strong></span>
+                </li>
+                {{!-- <li class="list-group-item d-flex  border-0 px-0 ms-auto"
+                  style="background-color:rgb(241, 234, 234);">
+                  <input type="text" name="totalamount" value="{{total}}" class="form-control" form="coupon" hidden>
+                  <input type="text" name="code" class="form-control" form="coupon" placeholder="enter coupon code">
+                  <button type="submit" class="btn btn-success ms-1" form="coupon">Apply</button>
+                </li>
+                <p class="text-danger ms-auto" id="userAll"></p> --}}
+              </ul>
+
+
             </div>
+
+
+            <div class="card-header py-3 bg-dark text-light">
+              <h5 class="mb-0">Payment Method</h5>
+            </div>
+            <div class="card-body mt-4">
+
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="COD"><strong>Cash
+                  On Delivery</strong>
+                <label class="form-check-label" for="radio1"></label>
+              </div>
+
+              <div class="form-check mt-4">
+                <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="ONLINE"
+                  checked><strong>Razorpay</strong>
+                <label class="form-check-label" for="radio1"></label>
+              </div>
+
+
+              <div class="form-check mt-4">
+                <input type="radio" class="form-check-input" id="radio1" name="payment-method"
+                  value="PAYPAL"><strong>Paypal</strong>
+                <label class="form-check-label" for="radio1"></label>
+              </div>
+
+
+
+              </ul>
+              <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
+                PLACE ORDER
+              </button>
+            </div>
+
           </div>
         </div>
-        {{/each}}
-        <input type="text" value="{{user._id}}" name="userId" class="form-control" hidden/>
-
-    {{!-- <div class="card mb-4">
-      <div class="card-header py-3 bg-dark">
-        <a href="/old-address" class="btn btn-primary">old address</a>
-        <h5 class="mb-0 text-light">ADD ADDRESS</h5>
       </div>
-      <div class="card-body bg-light">
-        
-          <!-- 2 column grid layout with text inputs for the first and last names -->
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form7Example1" name="name" class="form-control" />
-                <input type="text" value="{{user._id}}" name="userId" class="form-control" hidden/>
-                <label class="form-label" for="form7Example1">Name</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form7Example2" name="phoneNumber" class="form-control" />
-                <label class="form-label" for="form7Example2">Phone Number</label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Text input -->
-          <div class="row mb-4">
-            <div class="col">
-          <div class="form-outline mb-4">
-            <input type="text" id="form7Example3" name="state" class="form-control" />
-            <label class="form-label" for="form7Example3">State</label>
-          </div>
-          </div>
-
-          <!-- Text input -->
-           <div class="col">
-          <div class="form-outline mb-4">
-            <input type="text" id="form7Example4" name="pincode" class="form-control"/>
-            <label class="form-label" for="form7Example4">Pincode</label>
-          </div>
-           </div>
-           </div>
-
-          <!-- Email input -->
-           <div class="row mb-4">
-            <div class="col">
-          <div class="form-outline mb-4">
-            <input type="text" id="form7Example5" name="city" class="form-control" />
-            <label class="form-label" for="form7Example5">City</label>
-          </div>
-        </div>
-          <!-- Number input -->
-          <div class="col">
-          <div class="form-outline mb-4">
-            <input type="number" id="form7Example6" name="house" class="form-control" />
-            <label class="form-label" for="form7Example6">House No,Building Name</label>
-          </div>
-          </div>
-          </div>
-
-          <!-- Message input -->
-          <div class="form-outline mb-4">
-            <textarea class="form-control" id="form7Example7" name="address" rows="4"></textarea>
-            <label class="form-label" for="form7Example7">Address information</label>
-          </div>
-
-          <!-- Checkbox -->
-        
-      </div>
-    </div> --}}
-  </div>
-
-  <div class="col-md-4 mb-4 mt-5">
-    <div class="card mb-4" style="background-color:rgb(241, 234, 234);">
-      <div class="card-header py-3 bg-dark text-light" >
-        <h5 class="mb-0">Amount</h5>
-      </div>
-      <div class="card-body"  >
-        <ul class="list-group list-group-flush" >
-          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0" style="background-color:rgb(241, 234, 234);">
-            coupon amount
-            <span> {{discount}}</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center px-0" style="background-color:rgb(241, 234, 234);">
-            Shipping
-            <span>free</span>
-          </li>
-           <li class="list-group-item d-flex justify-content-between align-items-center px-0" style="background-color:rgb(241, 234, 234);">
-            Delivery charge
-            <span>free</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3" style="background-color:rgb(241, 234, 234);">
-            <div>
-              <strong>Total amount</strong>
-              <strong>
-                <p class="mb-0">(including GST)</p>
-              </strong>
-            </div>
-            <span ><strong id="price">₹{{price}}</strong></span>
-          </li>
-           {{!-- <li class="list-group-item d-flex  border-0 px-0 ms-auto" style="background-color:rgb(241, 234, 234);">
-             <input  type="text" name="totalamount" value="{{total}}" class="form-control" form="coupon" hidden>
-             <input  type="text" name="code" class="form-control" form="coupon" placeholder="enter coupon code">
-            <button type="submit" class="btn btn-success ms-1" form="coupon">Apply</button>
-          </li>
-          <p class="text-danger ms-auto" id="userAll"></p> --}}
-        </ul>
-
-     
-      </div>
-
-
-         <div class="card-header py-3 bg-dark text-light">
-        <h5 class="mb-0">Payment Method</h5>
-      </div>
-      <div class="card-body mt-4">
- 
-         <div class="form-check">
-  <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="COD" ><strong>Cash On Delivery</strong>
-  <label class="form-check-label" for="radio1"></label>
-</div>
-        
-          <div class="form-check mt-4">
-  <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="ONLINE" checked><strong>Razorpay</strong>
-  <label class="form-check-label" for="radio1"></label>
-</div>
-
-
-          <div class="form-check mt-4">
-  <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="PAYPAL" ><strong>Paypal</strong>
-  <label class="form-check-label" for="radio1"></label>
-</div>
-
-
-
-        </ul>
-        <button type="submit"  class="btn btn-primary btn-lg btn-block mt-4">
-          PLACE ORDER
-        </button>
-      </div>
-     
-    </div>
-  </div>
-</div>
- </form>
+    </form>
 
 </body>
 <script>
 
-  $("#checkout-form").submit((e)=>{
+  $("#checkout-form").submit((e) => {
     e.preventDefault()
     $.ajax({
-      url:'/place-order',
-      method:'post',
-      data:$('#checkout-form').serialize(),
-      success:(response)=>{  
-       if(response.codSuccess){
-         location.href='/order-success'
-       }else if(response.paypal){
-         location.href=response.url;
-         
-        }else{
+      url: '/place-order',
+      method: 'post',
+      data: $('#checkout-form').serialize(),
+      success: (response) => {
+        if (response.codSuccess) {
+          location.href = '/order-success'
+        } else if (response.paypal) {
+          location.href = response.url;
+
+        } else {
           razorpayPayment(response)
-        } 
+        }
       }
     })
   })
-  function razorpayPayment(order){
+  function razorpayPayment(order) {
     var options = {
-    "key": "rzp_test_IYqnwXk3p7eSL2", // Enter the Key ID generated from the Dashboard
-    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Acme Corp",
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "handler": function (response){
+      "key": "rzp_test_IYqnwXk3p7eSL2", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Acme Corp",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
 
-        verifyPayment(response,order)
-    },
-    "prefill": {
+        verifyPayment(response, order)
+      },
+      "prefill": {
         "name": "Gaurav Kumar",
         "email": "gaurav.kumar@example.com",
         "contact": "9999999999"
-    },
-    "notes": {
+      },
+      "notes": {
         "address": "Razorpay Corporate Office"
-    },
-    "theme": {
+      },
+      "theme": {
         "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
- rzp1.open();
-  }
-function verifyPayment(payment,order){
-  $.ajax({
-    url:'/verify-payment',
-    data:{
-      payment,
-      order
-    },
-    method:'post',
-    success:(response)=>{
-      if(response.status){
-        location.href='/order-success'
-      }else{
-        alert('payment failed')
       }
-    }
-  })
-}
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+  }
+  function verifyPayment(payment, order) {
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          location.href = '/order-success'
+        } else {
+          alert('payment failed')
+        }
+      }
+    })
+  }
 
-$("#coupon").submit((e)=>{
+  $("#coupon").submit((e) => {
     e.preventDefault()
     $.ajax({
-      url:'/applycoupon',
-      method:'post',
-      data:$('#coupon').serialize(),
-      success:(response)=>{     
-        if(response.user){
-          document.getElementById('userAll').innerHTML='already used';
-        }else if(response.offerprice){
+      url: '/applycoupon',
+      method: 'post',
+      data: $('#coupon').serialize(),
+      success: (response) => {
+        if (response.user) {
+          document.getElementById('userAll').innerHTML = 'already used';
+        } else if (response.offerprice) {
           console.log(response.offerprice)
-            document.getElementById('price').innerHTML='₹'+response.offerprice;
+          document.getElementById('price').innerHTML = '₹' + response.offerprice;
 
-        }else
-        {
-           document.getElementById('userAll').innerHTML='cuopon invalid';
+        } else {
+          document.getElementById('userAll').innerHTML = 'cuopon invalid';
         }
       }
     })

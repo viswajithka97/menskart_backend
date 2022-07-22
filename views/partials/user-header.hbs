@@ -1,137 +1,132 @@
-  <header >
-      <nav class="navbar navbar-expand-lg navbar-light bg-dark" >
-        <div>
-        <a class="navbar-brand text-light ms-5" href="/">MEN'S CART</a>
-        </div>
-      
-        <div class="ms-auto me-5">
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div>
+      <a class="navbar-brand text-light ms-5" href="/">MEN'S CART</a>
+    </div>
 
-          <div class="collapse navbar-collapse text-light" id="navbarNav">
-            <ul class="navbar-nav mb-3">
-              <li class="nav-item me-4 mt-4">
-               <a class="nav-link text-light" aria-current="page" href="/wishilist-view">
-               <i class="fas fa-heart fa-lg text-light " id="cart-btn"></i>
-               {{#if user}}
-                   <span class="badge badge-danger" id="wishilistCount">+{{wishilistCount}}</span>{{/if}}
-               Wishlist</a> 
-              </li>
+    <div class="ms-auto me-5">
 
-
-
-              <li class="nav-item me-4 mt-4">
-                <a class="nav-link text-light" aria-current="page" href="/cart">  
-                 <i class="fa fa-shopping-cart fa-lg text-light" id="cart-btn">   
-                 </i>  {{#if user}} <span class="badge badge-danger" id="cartCount">+{{cartCount}}</span>{{/if}}
-                  cart</a>
-              </li>           
-              <li class="nav-item mt-4 me-5">
-                <a class="nav-link text-light" href="/orders"><i class="fas fa-shopping-bag fa-lg pe-2"></i>Orders</a>
-              </li>
-            
-
-              <li class="nav-item mt-4">
-               <div class="dropdown">
-  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    {{#if user}}
-    {{user.name}}
-    {{else}}
-      <i class="fas fa-user pe-2"></i>LOGIN
-    {{/if}}
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-     {{#if user}}
-        <li><a class="dropdown-item" href="/user-profile">My Profile</a></li>
-    <li><a class="dropdown-item" href="/logout">Logout</a></li>
-  
-    {{else}}
-      <li><a class="dropdown-item" href="/login">Login</a></li>
-{{/if}}
-  </ul>
-</div>
-              </li>
-
-            </ul>
-          </div>
-        </div>
-
-        <div class="collapse" id="navbarToggleExternalContent">
-          <div class="bg-dark p-4">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link text-light" aria-current="page" href="#">
-
-                </a>
-              </li>
-              <li class="nav-item">
-             <div class="dropdown">
-   <ul class="navbar-nav">
-              <li class="nav-item me-4 mt-4">
-               <a class="nav-link text-light" aria-current="page" href="/wishilist-view"><i class="fas fa-heart fa-lg pe-2"></i> Wishlist</a> 
-
-              </li>
+      <div class="collapse navbar-collapse text-light" id="navbarNav">
+        <ul class="navbar-nav mb-3">
+          <li class="nav-item me-4 mt-4">
+            <a class="nav-link text-light" aria-current="page" href="/wishilist-view">
+              <i class="fas fa-heart fa-lg text-light " id="cart-btn"></i>
+              {{#if user}}
+              <span class="badge badge-danger" id="wishilistCount">+{{wishilistCount}}</span>{{/if}}
+              Wishlist</a>
+          </li>
 
 
 
-              <li class="nav-item me-4 mt-4">
-                <a class="nav-link text-light" aria-current="page" href="/cart">    <div
-            class="fa fa-shopping-cart fa-lg text-light pe-2"
-            id="cart-btn"
-          ></div> cart</a>
-              </li>
+          <li class="nav-item me-4 mt-4">
+            <a class="nav-link text-light" aria-current="page" href="/cart">
+              <i class="fa fa-shopping-cart fa-lg text-light" id="cart-btn">
+              </i> {{#if user}} <span class="badge badge-danger" id="cartCount">+{{cartCount}}</span>{{/if}}
+              cart</a>
+          </li>
+          <li class="nav-item mt-4 me-5">
+            <a class="nav-link text-light" href="/orders"><i class="fas fa-shopping-bag fa-lg pe-2"></i>Orders</a>
+          </li>
 
 
-            
-              <li class="nav-item mt-4 me-5">
-                <a class="nav-link text-light" href="/orders"><i class="fas fa-shopping-bag fa-lg pe-2"></i>Orders</a>
-              </li>
-            
+          <li class="nav-item mt-4">
+            <div class="dropdown">
+              <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{#if user}}
+                {{user.name}}
+                {{else}}
+                <i class="fas fa-user pe-2"></i>LOGIN
+                {{/if}}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                {{#if user}}
+                <li><a class="dropdown-item" href="/user-profile">My Profile</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
 
-              <li class="nav-item mt-4">
-               <div class="dropdown">
-  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    {{#if user}}
-    {{user.name}}
-    {{else}}
-      <i class="fas fa-user pe-2"></i>LOGIN
-    {{/if}}
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-     {{#if user}}
-     <li><a class="dropdown-item" href="/user-profile">My Profile</a></li>
-    <li><a class="dropdown-item" href="/logout">Logout</a></li>
-    {{else}}
-      <li><a class="dropdown-item" href="/login">Login</a></li>
-{{/if}}
-  </ul>
-</div>
-              </li>
+                {{else}}
+                <li><a class="dropdown-item" href="/login">Login</a></li>
+                {{/if}}
+              </ul>
+            </div>
+          </li>
 
-            </ul>
-  
-</div>
-              </li>
+        </ul>
+      </div>
+    </div>
 
-            </ul>
-          </div>
-        </div>
+    <div class="collapse" id="navbarToggleExternalContent">
+      <div class="bg-dark p-4">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-light" aria-current="page" href="#">
 
-              </li>
-            </ul>
-          </div>
-        </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item me-4 mt-4">
+                  <a class="nav-link text-light" aria-current="page" href="/wishilist-view"><i
+                      class="fas fa-heart fa-lg pe-2"></i> Wishlist</a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarToggleExternalContent"
-          aria-controls="navbarToggleExternalContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                </li>
 
-      </nav>
 
-    </header>
+
+                <li class="nav-item me-4 mt-4">
+                  <a class="nav-link text-light" aria-current="page" href="/cart">
+                    <div class="fa fa-shopping-cart fa-lg text-light pe-2" id="cart-btn"></div> cart
+                  </a>
+                </li>
+
+
+
+                <li class="nav-item mt-4 me-5">
+                  <a class="nav-link text-light" href="/orders"><i class="fas fa-shopping-bag fa-lg pe-2"></i>Orders</a>
+                </li>
+
+
+                <li class="nav-item mt-4">
+                  <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      {{#if user}}
+                      {{user.name}}
+                      {{else}}
+                      <i class="fas fa-user pe-2"></i>LOGIN
+                      {{/if}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      {{#if user}}
+                      <li><a class="dropdown-item" href="/user-profile">My Profile</a></li>
+                      <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                      {{else}}
+                      <li><a class="dropdown-item" href="/login">Login</a></li>
+                      {{/if}}
+                    </ul>
+                  </div>
+                </li>
+
+              </ul>
+
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    </li>
+    </ul>
+    </div>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
+      aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  </nav>
+
+</header>
