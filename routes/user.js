@@ -366,7 +366,7 @@ router.post("/place-order/:id", async (req, res) => {
   let products = await userHelpers.getCartProductList(userId);
   let totalPrice = await userHelpers.getTotalAmount(userId);
   let total = totalPrice - req.session.discount;
-  let userName = req.session.user.name;
+  let userName = req.body.name;
   let address = await userHelpers.EditAddress(
     userId,
     req.body.checkoutAddress
