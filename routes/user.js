@@ -476,10 +476,9 @@ router.get("/orders/:id", async (req, res) => {
   let orders = await userHelpers.getUserOrders(userId);
 
   res.send({
-    user: userId,
+
     orders,
-    cartCount,
-    wishilistCount,
+
   });
 });
 router.get("/view-order-products/:id", async (req, res) => {
