@@ -151,7 +151,7 @@ router.get("/cart/:id", async (req, res) => {
     res.send({
       products,
       cartCount,
-  
+
       totalValue,
       wishilistCount,
     });
@@ -484,6 +484,7 @@ router.get("/orders/:id", async (req, res) => {
 });
 router.get("/view-order-products/:id", async (req, res) => {
   const userId = req.params.id;
+  const orderId = req.body.orderId;
   console.log("Arshu", req.params.id);
   if (userId) {
     var cartCount = await userHelpers.getCarCount(userId);
@@ -491,7 +492,7 @@ router.get("/view-order-products/:id", async (req, res) => {
       userId
     );
   }
-  let products = await userHelpers.getOrderProducts(userId);
+  let products = await userHelpers.getOrderProducts(orderId);
   console.log(products);
   res.send({
     user: userId,
