@@ -94,7 +94,7 @@ router.post("/signup", (req, res) => {
     } else {
       userHelpers.doSignup(req.body).then((response) => {
         console.log(response);
-        req.send({ response })
+        res.send({ response })
         // res.redirect("/login");
       });
     }
@@ -365,7 +365,7 @@ router.post("/place-order/:id", async (req, res) => {
   console.log(req.body, "hggggggggggggggggggggggggggggggggggggggggggg");
   let products = await userHelpers.getCartProductList(userId);
   let totalPrice = await userHelpers.getTotalAmount(userId);
-  let total =req.body.total;
+  let total = req.body.total;
   let userName = req.body.name;
   let address = await userHelpers.EditAddress(
     userId,
