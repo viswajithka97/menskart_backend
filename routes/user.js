@@ -486,19 +486,11 @@ router.get("/view-order-products/:id", async (req, res) => {
   const userId = req.params.id;
   const orderId = req.body.orderId;
   console.log("Arshu", req.params.id);
-  if (userId) {
-    var cartCount = await userHelpers.getCarCount(userId);
-    var wishilistCount = await userHelpers.getwishilistCount(
-      userId
-    );
-  }
+
   let products = await userHelpers.getOrderProducts(orderId);
   console.log(products);
   res.send({
-    user: userId,
     products,
-    wishilistCount,
-    cartCount,
   });
 });
 
