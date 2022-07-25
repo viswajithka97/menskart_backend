@@ -151,7 +151,7 @@ router.get("/cart/:id", async (req, res) => {
     res.send({
       products,
       cartCount,
-      total,
+  
       totalValue,
       wishilistCount,
     });
@@ -159,7 +159,6 @@ router.get("/cart/:id", async (req, res) => {
     res.send({
       products,
       cartCount,
-      total,
       totalValue,
       wishilistCount,
     });
