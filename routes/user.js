@@ -476,14 +476,12 @@ router.get("/orders/:id", async (req, res) => {
   let orders = await userHelpers.getUserOrders(userId);
 
   res.send({
-
     orders,
-
   });
 });
 router.get("/view-order-products/:id", async (req, res) => {
-  const userId = req.params.id;
-  const orderId = req.body.orderId;
+
+  const orderId = req.params.orderId;
   console.log("Arshu", req.params.id);
 
   let products = await userHelpers.getOrderProducts(orderId);
@@ -648,7 +646,7 @@ router.post("/edit-profile/:id", (req, res) => {
   req.session.user.email = user.email;
   req.session.user.phoneNumber = user.phoneNumber;
   userHelpers.updateUser(userId, user).then((resp) => {
-    res.redirect("/");
+    res.send({ resp });
   });
 });
 router.get("/add-new-address/:id", async (req, res) => {

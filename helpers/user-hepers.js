@@ -381,16 +381,16 @@ module.exports = {
         status: status,
         payment: "pending",
         Date: new Date(),
-        date:datetime,
+        date: datetime,
       };
       db.get()
         .collection(collection.ORDER_COLLECTION)
         .insertOne(orderObj)
         .then((response) => {
-          db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(method.userId)}).then((response)=>{
-          
+          db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(method.userId) }).then((response) => {
 
-        })
+
+          })
           resolve(response.insertedId);
         });
     });
@@ -693,8 +693,8 @@ module.exports = {
       let hmac = crypto.createHmac("sha256", "YGQg37fRzHRIJJKMycxb2Blh");
       hmac.update(
         details["payment[razorpay_order_id]"] +
-          "|" +
-          details["payment[razorpay_payment_id]"]
+        "|" +
+        details["payment[razorpay_payment_id]"]
       );
       hmac = hmac.digest("hex");
       console.log("dgff" + hmac);
@@ -1017,35 +1017,37 @@ module.exports = {
         });
     });
   },
-  checkPassword:(userid,details)=>{
+  checkPassword: (userid, details) => {
 
-    return new promise(async(resolve,reject)=>{
-      
-      
-    
-    let user= await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userid)})
-    if(user){
-      console.log(user);
-      console.log(details.oldpassword);
-      bcrypt.compare(details.oldpassword,user.password).then(async(status)=>{
-        console.log("lk");
-        console.log(status);
+    return new promise(async (resolve, reject) => {
 
-        if (status) {
-          let passbcrypt=await bcrypt.hash(details.newpass1,10)
-          db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userid)},
-          {$set:{
-            password:passbcrypt
-          }}).then((response)=>{
-            console.log(response);
-            resolve(response)
-          })
-          
-        }resolve(status)
-      })
-    }
+
+
+      let user = await db.get().collection(collection.USER_COLLECTION).findOne({ _id: objectId(userid) })
+      if (user) {
+        console.log(user);
+        console.log(details.oldpassword);
+        bcrypt.compare(details.oldpassword, user.password).then(async (status) => {
+          console.log("lk");
+          console.log(status);
+
+          if (status) {
+            let passbcrypt = await bcrypt.hash(details.newpass1, 10)
+            db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userid) },
+              {
+                $set: {
+                  password: passbcrypt
+                }
+              }).then((response) => {
+                console.log(response);
+                resolve(response)
+              })
+
+          } resolve(status)
+        })
+      }
     })
 
   }
- 
+
 };
