@@ -488,7 +488,7 @@ router.get("/view-order-products/:id", async (req, res) => {
   if (userId) {
     var cartCount = await userHelpers.getCarCount(userId);
     var wishilistCount = await userHelpers.getwishilistCount(
-      ruserId
+      userId
     );
   }
   let products = await userHelpers.getOrderProducts(userId);
