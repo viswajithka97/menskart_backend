@@ -1,195 +1,214 @@
 <style>
     body {
-    background: #d2c9ff
-}
+        background: #d2c9ff
+    }
 
-.form-control:focus {
-    box-shadow: none;
-    border-color: #BA68C8
-}
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8
+    }
 
-.profile-button {
-    background: rgb(0, 0, 0);
-    box-shadow: none;
-    border: none
-}
+    .profile-button {
+        background: rgb(0, 0, 0);
+        box-shadow: none;
+        border: none
+    }
 
-.profile-button:hover {
-    background: #2e1a32
-}
+    .profile-button:hover {
+        background: #2e1a32
+    }
 
-.profile-button:focus {
-    background: #682773;
-    box-shadow: none
-}
+    .profile-button:focus {
+        background: #682773;
+        box-shadow: none
+    }
 
-.profile-button:active {
-    background: #682773;
-    box-shadow: none
-}
+    .profile-button:active {
+        background: #682773;
+        box-shadow: none
+    }
 
-.back:hover {
-    color: #682773;
-    cursor: pointer
-}
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
 
-.labels {
-    font-size: 11px
-}
+    .labels {
+        font-size: 11px
+    }
 
-.add-experience:hover {
-    background: #ffffff;
-    color: rgb(235, 0, 0);
-    cursor: pointer;
-    border: solid 1px rgb(255, 255, 255)
-}
+    .add-experience:hover {
+        background: #ffffff;
+        color: rgb(235, 0, 0);
+        cursor: pointer;
+        border: solid 1px rgb(255, 255, 255)
+    }
 </style>
-<div class="container rounded bg-white mt-5 mb-5" >
-    <div class="row" >
-        <div class="col-md-3 border-right"  style="background-color:#ffff;">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><div>
-                {{#if user.profile}}
-                <a onclick="updateprofile()"><i  class="bi bi-trash"></i></a>
-                 <img class="rounded-circle mt-5" width="150px" src="/profile-pic/{{user._id}}.jpg">
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right" style="background-color:#ffff;">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <div>
+                    {{#if user.profile}}
+                    <a onclick="updateprofile()"><i class="bi bi-trash"></i></a>
+                    <img class="rounded-circle mt-5" width="150px" src="/profile-pic/{{user._id}}.jpg">
 
-                 {{else}}
-                 <i class="bi bi-pencil-square mt-auto"  data-bs-toggle="modal"
-                                    data-bs-target="#myModal"></i>
-                  <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"> 
-                 {{/if}}
+                    {{else}}
+                    <i class="bi bi-pencil-square mt-auto" data-bs-toggle="modal" data-bs-target="#myModal"></i>
+                    <img class="rounded-circle mt-5" width="150px"
+                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    {{/if}}
 
-                    </div><span class="font-weight-bold">{{user.name}}</span><span class="text-black-50">{{user.email}}</span><span> </span></div>
+                </div><span class="font-weight-bold">{{user.name}}</span><span
+                    class="text-black-50">{{user.email}}</span><span> </span>
+            </div>
         </div>
-          <div class="modal" id="myModal" >
-               <form action="/edit-profilepic" id="photo" method="post" enctype="multipart/form-data"></form>
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Add profile</h5>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                               
-
-                                                    <div class="mt-3">
-
-                                                        <input type="file" form="photo" name="image" placeholder="IMAGE1"
-                                                            class="form-control" id="imgView" required>
-                                                    </div>
+        <div class="modal" id="myModal">
+            <form action="/edit-profilepic" id="photo" method="post" enctype="multipart/form-data"></form>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
 
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" form="photo" class="btn btn-primary">Submit</button>
-                                                </form>
+                        <div class="mt-3">
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        <div class="col-md-5 border-right" style="background-color: #ffff;">
-            <div class="p-3 py-5">
-                
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
-                </div>
-              
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">User Name</label><input type="text" form="profile" class="form-control" placeholder="enter phone number" name="name" value="{{user.name}}"></div>
-                    <div class="col-md-12 mt-2"><label class="labels">Email</label><input type="text" form="profile" class="form-control" placeholder="enter address line 1" name="email" value="{{user.email}}"></div>
-                    <div class="col-md-12 mt-2"><label class="labels">Phone Number</label><input type="text" form="profile" class="form-control" placeholder="{{user.phoneNumber}}" name="phoneNumber" ></div>
-                    <div class="col-md-12 text-primary"><a class="ms-auto" data-bs-toggle="modal"
-                                    data-bs-target="#myModalp ">Change Phone Number?</a></div>
-                                    <div class="col-md-12 text-primary"><a class="ms-auto" data-bs-toggle="modal"
-                                    data-bs-target="#myModalpass ">Change Password?</a></div>
-
-
-                             <div class="modal" id="myModalp">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-primary">
-                                                <h5 class="modal-title">Edit Phone Number</h5>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-                                             <form action="/change-Phonenumber" method="post" >
-                                            <div class="modal-body">
-                                                    <div class="mt-3">
-                                                        <input type="tel"  maxlength="10" id="num"  name="phonenumber" placeholder="enter phone number"
-                                                            class="form-control" required>
-                                                    </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-
-                                            </div>
-                                    </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="modal" id="myModalpass">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-primary">
-                                                <h5 class="modal-title">Change Password</h5>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-                                             <form action="/change-Password" id="pass" method="post" ></form>
-                                            <div class="modal-body">
-                                                    <div class="mt-3">
-
-                                                        <input type="text"  minlength="4" id="num" form="pass"  name="oldpassword" placeholder="Enter Old Password"
-                                                            class="form-control"  required>
-                                                    </div>
-                                                     <div class="mt-3">
-
-                                                        <input type="text"  minlength="4" id="newpass1" form="pass" name="newpass1" placeholder="Enter New Password" 
-                                                            class="form-control" onkeyup="validatePassword()" required>
-                                                            <p id="Password-error" class="error text-danger"></p>
-                                                    </div>
-                                                        <div class="mt-3">
-                                                        <input type="text"  minlength="4" id="newpass2" form="pass"   name="newpass2" placeholder="Enter New Password"
-                                                            class="form-control" onkeyup="rePassword()" required> 
-                                                               <p id="rePassword-error" class="error text-danger"></p>
-                                                    </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary" onclick="return validateForm()" form="pass">Submit</button>
-
-                                            </div>
-                                    </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
+                            <input type="file" form="photo" name="image" placeholder="IMAGE1" class="form-control"
+                                id="imgView" required>
+                        </div>
 
 
                     </div>
-             
-                
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" form="profile">Save Profile</button></div>
-             
+                    <div class="modal-footer">
+                        <button type="submit" form="photo" class="btn btn-primary">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-4"  style="background-color:#ffff;">
+        <div class="col-md-5 border-right" style="background-color: #ffff;">
             <div class="p-3 py-5">
-  
-                
-                <div class="d-flex justify-content-between align-items-center experience"><span></span><span class="border px-3 p-1 add-experience"><a  href="/add-address" class="btn"><i class="fa fa-plus "></i>&nbsp;ADD ADDRESS</a></span></div><br>
-                {{#each address}}
-               
-               
-                <div class="col-md-12"><label class="labels text-muted">Address</label><span class="float-end"><a href="/edit-address/{{this.Address.Useraddress}}" class="text-decoration-none me-3">Edit</a><a href="/delete-address/{{this.Address.Useraddress}}" class="text-decoration-none text-danger">delete</a></span><textarea rows="3" class="form-control" value="">{{this.Address.name}}, {{this.Address.state}}, {{this.Address.address}}, {{this.Address.phoneNumber}}, {{this.Address.phoneNumber}}</textarea></div> <br>
-             
-                {{/each}}
-               
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
                 </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">User Name</label><input type="text" form="profile"
+                            class="form-control" placeholder="enter phone number" name="name" value="{{user.name}}">
+                    </div>
+                    <div class="col-md-12 mt-2"><label class="labels">Email</label><input type="text" form="profile"
+                            class="form-control" placeholder="enter address line 1" name="email" value="{{user.email}}">
+                    </div>
+                    <div class="col-md-12 mt-2"><label class="labels">Phone Number</label><input type="text"
+                            form="profile" class="form-control" placeholder="{{user.phoneNumber}}" name="phoneNumber">
+                    </div>
+                    <div class="col-md-12 text-primary"><a class="ms-auto" data-bs-toggle="modal"
+                            data-bs-target="#myModalp ">Change Phone Number?</a></div>
+                    <div class="col-md-12 text-primary"><a class="ms-auto" data-bs-toggle="modal"
+                            data-bs-target="#myModalpass ">Change Password?</a></div>
+
+
+                    <div class="modal" id="myModalp">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <h5 class="modal-title">Edit Phone Number</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form action="/change-Phonenumber" method="post">
+                                    <div class="modal-body">
+                                        <div class="mt-3">
+                                            <input type="tel" maxlength="10" id="num" name="phonenumber"
+                                                placeholder="enter phone number" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal" id="myModalpass">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <h5 class="modal-title">Change Password</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form action="/change-Password" id="pass" method="post"></form>
+                                <div class="modal-body">
+                                    <div class="mt-3">
+
+                                        <input type="text" minlength="4" id="num" form="pass" name="oldpassword"
+                                            placeholder="Enter Old Password" class="form-control" required>
+                                    </div>
+                                    <div class="mt-3">
+
+                                        <input type="text" minlength="4" id="newpass1" form="pass" name="newpass1"
+                                            placeholder="Enter New Password" class="form-control"
+                                            onkeyup="validatePassword()" required>
+                                        <p id="Password-error" class="error text-danger"></p>
+                                    </div>
+                                    <div class="mt-3">
+                                        <input type="text" minlength="4" id="newpass2" form="pass" name="newpass2"
+                                            placeholder="Enter New Password" class="form-control" onkeyup="rePassword()"
+                                            required>
+                                        <p id="rePassword-error" class="error text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" onclick="return validateForm()"
+                                        form="pass">Submit</button>
+
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit"
+                        form="profile">Save Profile</button></div>
+
+            </div>
+        </div>
+        <div class="col-md-4" style="background-color:#ffff;">
+            <div class="p-3 py-5">
+
+
+                <div class="d-flex justify-content-between align-items-center experience"><span></span><span
+                        class="border px-3 p-1 add-experience"><a href="/add-address" class="btn"><i
+                                class="fa fa-plus "></i>&nbsp;ADD ADDRESS</a></span></div><br>
+                {{#each address}}
+
+
+                <div class="col-md-12"><label class="labels text-muted">Address</label><span class="float-end"><a
+                            href="/edit-address/{{this.Address.Useraddress}}"
+                            class="text-decoration-none me-3">Edit</a><a
+                            href="/delete-address/{{this.Address.Useraddress}}"
+                            class="text-decoration-none text-danger">delete</a></span><textarea rows="3"
+                        class="form-control"
+                        value="">{{this.Address.name}}, {{this.Address.state}}, {{this.Address.address}}, {{this.Address.phoneNumber}}, {{this.Address.phoneNumber}}</textarea>
+                </div> <br>
+
+                {{/each}}
+
+            </div>
 
         </div>
     </div>
@@ -197,99 +216,99 @@
 </div>
 </div>
 <script defer src="https://cdn.crop.guide/loader/l.js?c=NVBMQR"></script>
-              <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                <script>
-                   function updateprofile()
-                   {  swal({
-  text: 'Are you sure want to remove profile pic ? ',
-  icon:"warning",
-  button: true,
-  dangerMode:true,
-  
-})
-.then((name) => {
-    if(name){
-      $.ajax({
-            url:'/update-profilepic',
-            method:'get',
-            success:(response)=>{
-            if(response){
-            swal("Status Updated",{
-            icon:"success"
-               })
-                    }  
-                    location.reload()
-              }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function updateprofile() {
+        swal({
+            text: 'Are you sure want to remove profile pic ? ',
+            icon: "warning",
+            button: true,
+            dangerMode: true,
+
+        })
+            .then((name) => {
+                if (name) {
+                    $.ajax({
+                        url: '/update-profilepic',
+                        method: 'get',
+                        success: (response) => {
+                            if (response) {
+                                swal("Status Updated", {
+                                    icon: "success"
+                                })
+                            }
+                            location.reload()
+                        }
+                    })
+                }
+
             })
+    }
+    var PasswordError = document.getElementById('Password-error');
+    var conformPassword = document.getElementById('rePassword-error')
+    function validatePassword() {
+        var message = document.getElementById('newpass1').value;
+        var required = 5;
+        var left = required - message.length;
+
+        if (left > 0) {
+            PasswordError.innerHTML = left + 'more character required';
+            return false;
         }
-  
-})
-}
-var PasswordError=document.getElementById('Password-error');
-var conformPassword=document.getElementById('rePassword-error')
-function validatePassword(){
-    var message = document.getElementById('newpass1').value;
-    var required=5;
-    var left=required-message.length;
 
-    if(left>0){
-      PasswordError.innerHTML=left+'more character required';
-        return false;
+        PasswordError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+        return true;
+    }
+    function rePassword() {
+        var password = document.getElementById('newpass1').value;
+        var password1 = document.getElementById('newpass2').value;
+        if (password != password1) {
+            conformPassword.innerHTML = 'password is not match';
+            return false;
+        }
+        conformPassword.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+        return true;
+
+    }
+    function validateForm() {
+        if (!validatePassword() || !rePassword()) {
+
+            // submitError.style.display='block';
+            submitError.innerHTML = 'Please fix error to submit';
+            setTimeout(function () { submitError.style.display = 'none'; }, 5000);
+            return false;
+        }
     }
 
-   PasswordError.innerHTML= '<i class="fa-solid fa-circle-check text-success"></i>';
-    return true;
-}
-function rePassword(){
-  var password=document.getElementById('newpass1').value;
-  var password1=document.getElementById('newpass2').value;
-  if(password!=password1){
-    conformPassword.innerHTML='password is not match';
-    return false;
-  }
-    conformPassword.innerHTML='<i class="fa-solid fa-circle-check text-success"></i>';
-    return true;
-  
-}
-function validateForm(){
-    if( !validatePassword() || !rePassword()){
+    $("#pass").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/change-Password',
+            method: 'post',
+            data: $('#pass').serialize(),
+            success: (response) => {
 
-        // submitError.style.display='block';
-        submitError.innerHTML='Please fix error to submit';
-        setTimeout(function(){submitError.style.display='none';},5000);
-        return false;
-    }
-}
-
-  $("#pass").submit((e)=>{
-    e.preventDefault()
-    $.ajax({
-      url:'/change-Password',
-      method:'post',
-      data:$('#pass').serialize(),
-      success:(response)=>{  
-
-       if(response){
-         location.href='/user-profile'
-       }else{
+                if (response) {
+                    location.href = '/user-profile'
+                } else {
 
 
-           swal({
-  text: 'Your Password Incorrect ? ',
-  icon:"warning",
-  button: true,
-  dangerMode:true,
-  
-})
-.then((name) => {
-    if(name){
- location.href='/user-profile'
-    }
-       })   
-        } 
-      }
+                    swal({
+                        text: 'Your Password Incorrect ? ',
+                        icon: "warning",
+                        button: true,
+                        dangerMode: true,
+
+                    })
+                        .then((name) => {
+                            if (name) {
+                                location.href = '/user-profile'
+                            }
+                        })
+                }
+            }
+        })
     })
-  })
 
 
 </script>

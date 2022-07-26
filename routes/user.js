@@ -480,8 +480,7 @@ router.get("/orders/:id", async (req, res) => {
   });
 });
 router.get("/view-order-products/:id", async (req, res) => {
-
-  const orderId = req.params.orderId;
+  const orderId = req.params.id;
   console.log("Arshu", req.params.id);
 
   let products = await userHelpers.getOrderProducts(orderId);
