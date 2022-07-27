@@ -181,9 +181,16 @@ router.post("/edit-category/:id", (req, res) => {
     let images = req.files.image;
     console.log("bjbbkbkj");
     if (req.files.image) {
-      images.mv("./public/category-image/" + id + ".jpg", (err, done) => { });
+      images.mv("./public/category-image/" + id + ".jpg", (err, done) => {
+        if (err) {
+          console.log(err);
+          res.send({ err });
+        } else {
+          res.send({ admin: true });
+        }
+      });
     }
-    res.send({ success: true });
+
   });
 });
 router.get("/all-users", (req, res) => {
