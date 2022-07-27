@@ -155,9 +155,8 @@ router.post("/add-category", (req, res) => {
       } else {
         res.send({ admin: true });
       }
-      res.send({done});
     });
-    
+
   });
 });
 router.get("/delete-category/:id", (req, res) => {
