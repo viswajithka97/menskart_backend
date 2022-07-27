@@ -175,7 +175,7 @@ router.get("/edit-category/:id", async (req, res) => {
 
 router.post("/edit-category/:id", (req, res) => {
   productHelper.updateCategory(req.params.id, req.body).then(() => {
-    res.redirect("/admin");
+    // res.redirect("/admin");
     console.log(response);
     let id = req.params.id;
     let images = req.files.image;
