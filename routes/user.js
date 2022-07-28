@@ -627,12 +627,12 @@ router.post("/edit-address/:id", (req, res) => {
     res.send({ resp });
   });
 });
-router.get("/delete-address/:id", (req, res) => {
+router.get("/delete-address/:id/:userId", (req, res) => {
   let addressId = req.params.id;
-  let userID = req.body.userId;
+  let userID = req.params.userId;
   userHelpers.deleteAddress(userID, addressId).then((resp) => {
     console.log(resp);
-    res.redirect("/user-profile");
+    res.send({ resp });
   });
 });
 router.post("/edit-profile/:id", (req, res) => {
