@@ -412,8 +412,9 @@ module.exports = {
         .find({ userId: objectId(userId) })
         .sort({ Date: -1 })
         .toArray();
-
-      resolve(orders);
+      var orderLength = orders.length;
+      console.log("orderLength", orderLength);
+      resolve({orders, orderLength});
     });
   },
   getOrderProducts: (orderId) => {

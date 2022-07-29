@@ -475,17 +475,17 @@ router.get("/orders/:id", async (req, res) => {
   console.log(req.session.user?._id);
   let orders = await userHelpers.getUserOrders(userId);
 
-  if (orders.length == 0) {
-    var orderlength = 0;
-    res.send({
-      orders, orderlength
-    });
-  } else {
-    var orderlength = orders.length;
-    res.send({
-      orders, orderlength
-    });
-  }
+  // if (orders.length == 0) {
+  //   var orderlength = 0;
+  res.send({
+    orders
+  });
+  // } else {
+  //   var orderlength = orders.length;
+  //   res.send({
+  //     orders, orderlength
+  //   });
+  // }
 }
 );
 router.get("/view-order-products/:id", async (req, res) => {
