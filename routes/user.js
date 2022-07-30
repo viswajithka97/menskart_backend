@@ -697,13 +697,7 @@ router.post("/add-new-address", async (req, res) => {
         console.log("cod");
         res.send({ payment: true });
       } else if (req.body["payment-method"] == "ONLINE") {
-        console.log("razorpay");
-        console.log(oderId);
-        console.log(totalPrice);
-        userHelpers.generateRazorpay(oderId, totalPrice).then((response) => {
-          console.log("djjd" + response);
-          res.send({ response });
-        });
+        res.send({ payment: true })
       } else {
         console.log("paypal");
         console.log(req.session.total);

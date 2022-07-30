@@ -414,7 +414,7 @@ module.exports = {
         .toArray();
       var orderLength = orders.length;
       console.log("orderLength", orderLength);
-      resolve({orders, orderLength});
+      resolve({ orders, orderLength });
     });
   },
   getOrderProducts: (orderId) => {
