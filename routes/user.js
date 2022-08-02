@@ -814,7 +814,7 @@ router.post("/change-Phonenumber", (req, res) => {
     .verifications.create({ to: `+91${phone}`, channel: "sms" })
     .then((resp) => {
       console.log(resp);
-      res.send({ phone });
+      res.send({ resp });
     });
 });
 router.post("/verify-otpprofile", (req, res) => {
