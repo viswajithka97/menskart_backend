@@ -157,7 +157,7 @@ router.get("/cart/:id", async (req, res) => {
     });
   } else {
     res.send({
-      products,
+      products, 
       cartCount,
       totalValue,
       wishilistCount,
@@ -293,10 +293,6 @@ router.get("/category-view/:id", async (req, res) => {
     console.log(products);
     res.send({
       products,
-      // wishilistCount,
-      // cartCount,
-      // user: req.session.user,
-      // userId: req.session.user._id,
     });
   });
 });
